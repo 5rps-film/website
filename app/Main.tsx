@@ -5,7 +5,7 @@ import { formatDate } from "pliny/utils/formatDate";
 import HeaderImage from "@/data/header.jpg";
 import Image from "next/image";
 import NewsletterForm from "pliny/ui/NewsletterForm";
-import { Instagram, X } from "@/components/social-icons/icons";
+import { Instagram } from "@/components/social-icons/icons";
 
 const MAX_DISPLAY = 5;
 
