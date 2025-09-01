@@ -10,7 +10,7 @@ const projectsData: Project[] = [
     title: "Official Instagram Page",
     description: `Our main content is on Instagram!`,
     imgSrc: "/static/images/instagram.jpg",
-    href: "https://instagram.com/remotestartupsenpai",
+    href: "https://instagram.com/5requestspersecond",
   },
   {
     title: "Official X Page",

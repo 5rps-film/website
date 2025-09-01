@@ -21,7 +21,7 @@ export default function Home({ posts }) {
           <div className="flex flex-col flex-wrap justify-center items-center">
             <a
               target="_blank"
-              href="https://instagram.com/remotestartupsenpai"
+              href="https://instagram.com/5requestspersecond"
               className="mb-2 flex justify-center items-center rounded px-2 py-1 mx-5 my-2 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
               style={{ backgroundColor: "#c13584" }}
             >
