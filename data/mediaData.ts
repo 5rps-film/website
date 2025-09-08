@@ -18,6 +18,12 @@ const projectsData: Project[] = [
     imgSrc: "/static/images/x.jpg",
     href: "https://x.com/5rps_film",
   },
+  {
+    title: "Official LinkedIn Page",
+    description: `We are also on LinkedIn!`,
+    imgSrc: "/static/images/linkedin.jpg",
+    href: "https://www.linkedin.com/company/5rps-film",
+  },
 ];
 
 export default projectsData;
