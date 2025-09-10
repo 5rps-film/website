@@ -13,7 +13,7 @@ const siteMetadata = {
     socialBanner: "/static/images/header.jpg",
     email: "contact@akiyamasho.com",
     discord: "https://discord.gg/R2UnmTAas4",
-    instagram: "https://www.instagram.com/remotestartupsenpai",
+    instagram: "https://www.instagram.com/5requestspersecond",
     locale: "en-US",
     analytics: {
         // If you want to use an analytics provider you have to add it to the

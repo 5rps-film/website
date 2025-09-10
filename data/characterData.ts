@@ -26,7 +26,7 @@ const projectsData: Character[] = [
   },
   {
     title: "Yusuf Avcı",
-    description: `A Turkish high school exchange student and coding prodigy, juggling part-time work to make ends meet
+    description: `A high school exchange student and coding prodigy, juggling part-time work to make ends meet
 `,
     position: "Full-stack Engineer",
     imgSrc: "/static/characters/yusuf.jpg",
