@@ -14,7 +14,7 @@ const projectsData: Character[] = [
   },
   {
     title: "Elizabeth Rohm",
-    description: `A sharp, no-nonsense engineer, frustrated by her micromanaging boss and the lack of real challenge, despite being a "celebrity engineer" in Tokyo’s tech scene`,
+    description: `A sharp, no-nonsense engineer who joins as CTO at a questionable startup. She makes the move after becoming frustrated with her micromanaging boss and the lack of real challenges at her main job, even though she is known as a “celebrity engineer” in Tokyo’s tech scene.`,
     position: "CTO",
     imgSrc: "/static/characters/liz.jpg",
   },
