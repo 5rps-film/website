@@ -14,7 +14,7 @@ const projectsData: Character[] = [
   },
   {
     title: "Elizabeth Rohm",
-    description: `A sharp, no-nonsense engineer, frustrated by her micromanaging boss and the lack of real challenge—despite being a "celebrity engineer" in Tokyo’s tech scene`,
+    description: `A sharp, no-nonsense engineer, frustrated by her micromanaging boss and the lack of real challenge, despite being a "celebrity engineer" in Tokyo’s tech scene`,
     position: "CTO",
     imgSrc: "/static/characters/liz.jpg",
   },
@@ -30,7 +30,7 @@ const projectsData: Character[] = [
 `,
     position: "Full-stack Engineer",
     imgSrc: "/static/characters/yusuf.jpg",
-  }
+  },
 ];
 
 export default projectsData;
