@@ -1,0 +1,24 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>5 Requests Per Second</title>
+      <link>https://5rps.jp/news</link>
+      <description>Official website for the animated film 5 Requests Per Second</description>
+      <language>en-us</language>
+      <managingEditor>contact@akiyamasho.com (秋山翔・kino.io)</managingEditor>
+      <webMaster>contact@akiyamasho.com (秋山翔・kino.io)</webMaster>
+      <lastBuildDate>Wed, 01 Jan 2025 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://5rps.jp/tags/instagram/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://5rps.jp/news/20250101-instagram-release</guid>
+    <title>🚀 Instagram Launch</title>
+    <link>https://5rps.jp/news/20250101-instagram-release</link>
+    <description>5 Request Per Second Instagram page is now live!</description>
+    <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+    <author>contact@akiyamasho.com (秋山翔・kino.io)</author>
+    <category>instagram</category><category>launch</category>
+  </item>
+
+    </channel>
+  </rss>
