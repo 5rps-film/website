@@ -7,9 +7,6 @@ import { genPageMetadata } from "app/seo";
 export const metadata = genPageMetadata({ title: "About" });
 
 export default function Page() {
-  const owner = allAuthors.find((p) => p.slug === "default") as Authors;
-  const ownerContent = coreContent(owner);
-
   const author = allAuthors.find((p) => p.slug === "s") as Authors;
   const authorContent = coreContent(author);
 
@@ -18,10 +15,8 @@ export default function Page() {
   ) as Authors;
   const assistingStudioContent = coreContent(assistingStudio);
 
-  const animationDirector = allAuthors.find(
-    (p) => p.slug === "andie",
-  ) as Authors;
-  const animationDirectorContent = coreContent(animationDirector);
+  const marketing = allAuthors.find((p) => p.slug === "marketing") as Authors;
+  const marketingContent = coreContent(marketing);
 
   const dougaStudio = allAuthors.find((p) => p.slug === "yihong") as Authors;
   const dougaStudioContent = coreContent(dougaStudio);
@@ -45,6 +40,9 @@ export default function Page() {
         </AuthorLayout>
         <AuthorLayout content={assistingDougaContent}>
           <MDXLayoutRenderer code={assistingDouga.body.code} />
+        </AuthorLayout>
+        <AuthorLayout content={marketingContent}>
+          <MDXLayoutRenderer code={marketing.body.code} />
         </AuthorLayout>
         <AuthorLayout content={authorContent}>
           <MDXLayoutRenderer code={author.body.code} />
