@@ -1,7 +1,7 @@
 # 5 Requests Per Second <a href="https://5rps.jp" target="_blank">Official Website</a>
 
 <a href="https://www.instagram.com/5requestspersecond/" target="_blank"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram"></a>
-<a href="https://discord.gg/Jb3ZvY5n" target="_blank"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
+<a href="https://discord.gg/cWae4TfR" target="_blank"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
 <a href="https://www.x.com/5rps-film" target="_blank"><img src="https://img.shields.io/badge/Twitter-000000?style=flat&logo=x&logoColor=white" alt="YouTube"></a>
 
 ### Requirements
