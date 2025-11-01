@@ -7,34 +7,48 @@
 ### Requirements
 
 - `pnpm`
+- `make` (GNU Make 4.x+)
 
 ### Installation
 
 ```bash
-pnpm install
+make install
 ```
 
-If you are using Windows, you may need to run:
+The Makefile defaults to `pnpm`. You can override the package manager for a one-off run with `make PNPM=npm install`.
 
-```bash
-set PWD="$(pwd)"
-```
+> **Windows tip:** Make sure you run these commands from an environment that provides GNU Make (e.g. Git Bash or WSL). If you prefer PowerShell, run the underlying `pnpm` commands directly.
+
 
 ### Development
 
 1. Run the development server
 
 ```bash
-pnpm run dev
+make dev
 ```
 
 2. You can now access the site on http://localhost:3000
+
+To run the Next.js build locally:
+
+```bash
+make build
+```
 
 ### Deployment
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=website-git-main-remote-startup-senpai)
 
 This website is directly deployed to [Vercel](https://vercel.com/remote-startup-senpai). Any changes to the `main` branch will be automatically deployed.
+
+You can trigger a deploy from your current branch with:
+
+```bash
+make deploy BRANCH=$(git branch --show-current)
+```
+
+The `BRANCH` variable defaults to `main`, so `make deploy` will push to `origin/main`.
 
 ## Template Reference
 
