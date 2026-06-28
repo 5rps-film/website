@@ -3,6 +3,8 @@ import { MDXLayoutRenderer } from "pliny/mdx-components";
 import AuthorLayout from "@/layouts/AuthorLayout";
 import { coreContent } from "pliny/utils/contentlayer";
 import { genPageMetadata } from "app/seo";
+import LocalizedHeading from "@/components/LocalizedHeading";
+import { components } from "@/components/MDXComponents";
 
 export const metadata = genPageMetadata({ title: "About" });
 
@@ -28,24 +30,34 @@ export default function Page() {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            About
-          </h1>
+          <LocalizedHeading labelKey="about" />
         </div>
         <AuthorLayout content={dougaStudioContent}>
-          <MDXLayoutRenderer code={dougaStudio.body.code} />
+          <MDXLayoutRenderer
+            code={dougaStudio.body.code}
+            components={components}
+          />
         </AuthorLayout>
         <AuthorLayout content={assistingStudioContent}>
-          <MDXLayoutRenderer code={assistingStudio.body.code} />
+          <MDXLayoutRenderer
+            code={assistingStudio.body.code}
+            components={components}
+          />
         </AuthorLayout>
         <AuthorLayout content={assistingDougaContent}>
-          <MDXLayoutRenderer code={assistingDouga.body.code} />
+          <MDXLayoutRenderer
+            code={assistingDouga.body.code}
+            components={components}
+          />
         </AuthorLayout>
         <AuthorLayout content={marketingContent}>
-          <MDXLayoutRenderer code={marketing.body.code} />
+          <MDXLayoutRenderer
+            code={marketing.body.code}
+            components={components}
+          />
         </AuthorLayout>
         <AuthorLayout content={authorContent}>
-          <MDXLayoutRenderer code={author.body.code} />
+          <MDXLayoutRenderer code={author.body.code} components={components} />
         </AuthorLayout>
       </div>
     </>

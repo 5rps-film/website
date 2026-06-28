@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "@/components/Link";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
@@ -6,49 +8,55 @@ import HeaderImage from "@/data/header.jpg";
 import Image from "next/image";
 import NewsletterForm from "pliny/ui/NewsletterForm";
 import { Instagram } from "@/components/social-icons/icons";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizePosts } from "@/data/localizedPosts";
 
 const MAX_DISPLAY = 5;
 
 export default function Home({ posts }) {
+  const { locale, t } = useLocale();
+  const localizedPosts = localizePosts(posts, locale);
+  const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center space-y-2 pb-8 pt-6 md:space-y-5">
           <Image src={HeaderImage} alt="header" />
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            {t("siteDescription")}
           </p>
-          <div className="flex flex-col flex-wrap justify-center items-center">
+          <div className="flex flex-col flex-wrap items-center justify-center">
             <a
               target="_blank"
               href="https://instagram.com/5requestspersecond"
-              className="mb-2 flex justify-center items-center rounded px-2 py-1 mx-5 my-2 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+              className="mx-5 my-2 mb-2 flex items-center justify-center rounded px-2 py-1 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
               style={{ backgroundColor: "#c13584" }}
             >
-              <Instagram className="fill-current px-2 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-14 w-14" />
-              <span className="text-xl px-2 whitespace-nowrap">
-                Follow the production on Instagram
+              <Instagram className="h-14 w-14 fill-current px-2 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400" />
+              <span className="whitespace-nowrap px-2 text-xl">
+                {t("followInstagram")}
               </span>
             </a>
           </div>
         </div>
 
-        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 py-5">
-          News
+        <h1 className="py-5 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          {t("news")}
         </h1>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && "No posts found."}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
+          {!localizedPosts.length && t("noPosts")}
+          {localizedPosts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post;
             return (
               <li key={slug} className="py-12">
                 <article>
                   <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
-                      <dt className="sr-only">Published on</dt>
+                      <dt className="sr-only">{t("publishedOn")}</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                         <time dateTime={date}>
-                          {formatDate(date, siteMetadata.locale)}
+                          {formatDate(date, dateLocale)}
                         </time>
                       </dd>
                     </dl>
@@ -77,9 +85,9 @@ export default function Home({ posts }) {
                         <Link
                           href={`/news/${slug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read more: "${title}"`}
+                          aria-label={`${t("readMore")}: ${title}`}
                         >
-                          Read more &rarr;
+                          {t("readMore")} &rarr;
                         </Link>
                       </div>
                     </div>
@@ -90,14 +98,14 @@ export default function Home({ posts }) {
           })}
         </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
+      {localizedPosts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/news"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
+            aria-label={t("allPostsLink")}
           >
-            All Posts &rarr;
+            {t("allPostsLink")} &rarr;
           </Link>
         </div>
       )}

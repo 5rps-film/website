@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "./Link";
 import headerNavLinks from "@/data/headerNavLinks";
+import { useLocale } from "@/components/LocaleProvider";
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
+  const { t } = useLocale();
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -22,7 +24,7 @@ const MobileNav = () => {
   return (
     <>
       <button
-        aria-label="Toggle Menu"
+        aria-label={t("toggleMenu")}
         onClick={onToggleNav}
         className="sm:hidden"
       >
@@ -47,7 +49,7 @@ const MobileNav = () => {
         <div className="flex justify-end">
           <button
             className="mr-8 mt-11 h-8 w-8"
-            aria-label="Toggle Menu"
+            aria-label={t("toggleMenu")}
             onClick={onToggleNav}
           >
             <svg
@@ -72,7 +74,7 @@ const MobileNav = () => {
                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                 onClick={onToggleNav}
               >
-                {link.title}
+                {t(link.labelKey as Parameters<typeof t>[0])}
               </Link>
             </div>
           ))}

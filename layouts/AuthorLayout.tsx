@@ -1,14 +1,21 @@
+"use client";
+
 import { ReactNode } from "react";
 import type { Authors } from "contentlayer/generated";
+import { CoreContent } from "pliny/utils/contentlayer";
 import SocialIcon from "@/components/social-icons";
 import Image from "@/components/Image";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizeAuthor } from "@/data/localizedAuthors";
 
 interface Props {
   children: ReactNode;
-  content: Omit<Authors, "_id" | "_raw" | "body">;
+  content: CoreContent<Authors>;
 }
 
 export default function AuthorLayout({ children, content }: Props) {
+  const { locale, t } = useLocale();
+  const localizedContent = localizeAuthor(content, locale);
   const {
     name,
     avatar,
@@ -19,7 +26,7 @@ export default function AuthorLayout({ children, content }: Props) {
     linkedin,
     github,
     website,
-  } = content;
+  } = localizedContent;
 
   return (
     <>
@@ -28,7 +35,7 @@ export default function AuthorLayout({ children, content }: Props) {
           {avatar && (
             <Image
               src={avatar}
-              alt="avatar"
+              alt={t("avatar")}
               width={192}
               height={192}
               className="h-48 w-48 rounded-full"

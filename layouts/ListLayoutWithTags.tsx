@@ -10,6 +10,9 @@ import Link from "@/components/Link";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
 import tagData from "app/tag-data.json";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizePosts } from "@/data/localizedPosts";
+import strings from "@/data/strings";
 
 interface PaginationProps {
   totalPages: number;
@@ -18,6 +21,7 @@ interface PaginationProps {
 interface ListLayoutProps {
   posts: CoreContent<Blog>[];
   title: string;
+  titleKey?: keyof typeof strings;
   initialDisplayPosts?: CoreContent<Blog>[];
   pagination?: PaginationProps;
 }
@@ -27,6 +31,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   const basePath = pathname.split("/")[1];
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
+  const { t } = useLocale();
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -36,7 +41,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             className="cursor-auto disabled:opacity-50"
             disabled={!prevPage}
           >
-            Previous
+            {t("previous")}
           </button>
         )}
         {prevPage && (
@@ -48,23 +53,23 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             }
             rel="prev"
           >
-            Previous
+            {t("previous")}
           </Link>
         )}
         <span>
-          {currentPage} of {totalPages}
+          {currentPage} {t("pageOf")} {totalPages}
         </span>
         {!nextPage && (
           <button
             className="cursor-auto disabled:opacity-50"
             disabled={!nextPage}
           >
-            Next
+            {t("next")}
           </button>
         )}
         {nextPage && (
           <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
+            {t("next")}
           </Link>
         )}
       </nav>
@@ -75,23 +80,28 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 export default function ListLayoutWithTags({
   posts,
   title,
+  titleKey,
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
   const pathname = usePathname();
+  const { locale, t } = useLocale();
   const tagCounts = tagData as Record<string, number>;
   const tagKeys = Object.keys(tagCounts);
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
+  const localizedPosts = localizePosts(posts, locale);
+  const localizedInitialPosts = localizePosts(initialDisplayPosts, locale);
+  const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
 
   const displayPosts =
-    initialDisplayPosts.length > 0 ? initialDisplayPosts : posts;
+    localizedInitialPosts.length > 0 ? localizedInitialPosts : localizedPosts;
 
   return (
     <>
       <div>
         <div className="pb-6 pt-6">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            {title}
+            {titleKey ? t(titleKey) : title}
           </h1>
         </div>
         <div className="flex sm:space-x-24">
@@ -99,31 +109,31 @@ export default function ListLayoutWithTags({
             <div className="px-6 py-4">
               {pathname.startsWith("/news") ? (
                 <h3 className="font-bold uppercase text-primary-500">
-                  All Posts
+                  {t("allPosts")}
                 </h3>
               ) : (
                 <Link
                   href={`/news`}
                   className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                 >
-                  All Posts
+                  {t("allPosts")}
                 </Link>
               )}
               <ul>
-                {sortedTags.map((t) => {
+                {sortedTags.map((tag) => {
                   return (
-                    <li key={t} className="my-3">
-                      {pathname.split("/tags/")[1] === slug(t) ? (
+                    <li key={tag} className="my-3">
+                      {pathname.split("/tags/")[1] === slug(tag) ? (
                         <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
-                          {`${t} (${tagCounts[t]})`}
+                          {`${tag} (${tagCounts[tag]})`}
                         </h3>
                       ) : (
                         <Link
-                          href={`/tags/${slug(t)}`}
+                          href={`/tags/${slug(tag)}`}
                           className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
-                          aria-label={`View posts tagged ${t}`}
+                          aria-label={`${t("viewPostsTagged")} ${tag}`}
                         >
-                          {`${t} (${tagCounts[t]})`}
+                          {`${tag} (${tagCounts[tag]})`}
                         </Link>
                       )}
                     </li>
@@ -134,16 +144,17 @@ export default function ListLayoutWithTags({
           </div>
           <div>
             <ul>
+              {!displayPosts.length && t("noPosts")}
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post;
                 return (
                   <li key={path} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <dl>
-                        <dt className="sr-only">Published on</dt>
+                        <dt className="sr-only">{t("publishedOn")}</dt>
                         <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                           <time dateTime={date}>
-                            {formatDate(date, siteMetadata.locale)}
+                            {formatDate(date, dateLocale)}
                           </time>
                         </dd>
                       </dl>

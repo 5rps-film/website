@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "@/components/Image";
 import Bleed from "pliny/ui/Bleed";
@@ -9,12 +11,14 @@ import PageTitle from "@/components/PageTitle";
 import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizePost } from "@/data/localizedPosts";
 
 interface LayoutProps {
   content: CoreContent<Blog>;
   children: ReactNode;
-  next?: { path: string; title: string };
-  prev?: { path: string; title: string };
+  next?: { path: string; title: string; slug?: string };
+  prev?: { path: string; title: string; slug?: string };
 }
 
 export default function PostMinimal({
@@ -23,7 +27,15 @@ export default function PostMinimal({
   prev,
   children,
 }: LayoutProps) {
-  const { slug, title, images } = content;
+  const { locale, t } = useLocale();
+  const localizedContent = localizePost(content, locale);
+  const localizedNext = next
+    ? localizePost(next as typeof next & { slug: string }, locale)
+    : next;
+  const localizedPrev = prev
+    ? localizePost(prev as typeof prev & { slug: string }, locale)
+    : prev;
+  const { slug, title, images } = localizedContent;
   const displayImage =
     images && images.length > 0
       ? images[0]
@@ -64,25 +76,25 @@ export default function PostMinimal({
           )}
           <footer>
             <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-              {prev && prev.path && (
+              {localizedPrev && localizedPrev.path && (
                 <div className="pt-4 xl:pt-8">
                   <Link
-                    href={`/${prev.path}`}
+                    href={`/${localizedPrev.path}`}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Previous post: ${prev.title}`}
+                    aria-label={`${t("previousPost")}: ${localizedPrev.title}`}
                   >
-                    &larr; {prev.title}
+                    &larr; {localizedPrev.title}
                   </Link>
                 </div>
               )}
-              {next && next.path && (
+              {localizedNext && localizedNext.path && (
                 <div className="pt-4 xl:pt-8">
                   <Link
-                    href={`/${next.path}`}
+                    href={`/${localizedNext.path}`}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Next post: ${next.title}`}
+                    aria-label={`${t("nextPost")}: ${localizedNext.title}`}
                   >
-                    {next.title} &rarr;
+                    {localizedNext.title} &rarr;
                   </Link>
                 </div>
               )}

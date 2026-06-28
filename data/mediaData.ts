@@ -1,26 +1,37 @@
+import { LocalizedString } from "@/lib/i18n";
+
 interface Project {
-  title: string;
-  description: string;
+  title: LocalizedString;
+  description: LocalizedString;
   href?: string;
   imgSrc?: string;
 }
 
 const projectsData: Project[] = [
   {
-    title: "Official Instagram Page",
-    description: `Our main content is on Instagram!`,
+    title: { en: "Official Instagram Page", ja: "公式Instagram" },
+    description: {
+      en: `Our main content is on Instagram.`,
+      ja: `メインの制作更新はInstagramで公開しています。`,
+    },
     imgSrc: "/static/images/instagram.jpg",
     href: "https://instagram.com/5requestspersecond",
   },
   {
-    title: "Official X Page",
-    description: `We are also on X!`,
+    title: { en: "Official X Page", ja: "公式X" },
+    description: {
+      en: `We are also on X.`,
+      ja: `Xでも最新情報を発信しています。`,
+    },
     imgSrc: "/static/images/x.jpg",
     href: "https://x.com/5rps_film",
   },
   {
-    title: "Official LinkedIn Page",
-    description: `We are also on LinkedIn!`,
+    title: { en: "Official LinkedIn Page", ja: "公式LinkedIn" },
+    description: {
+      en: `We are also on LinkedIn.`,
+      ja: `LinkedInにも公式ページがあります。`,
+    },
     imgSrc: "/static/images/linkedin.jpg",
     href: "https://www.linkedin.com/company/5rps-film",
   },

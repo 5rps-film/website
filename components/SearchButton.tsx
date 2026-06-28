@@ -1,8 +1,12 @@
+"use client";
+
 import { AlgoliaButton } from "pliny/search/AlgoliaButton";
 import { KBarButton } from "pliny/search/KBarButton";
 import siteMetadata from "@/data/siteMetadata";
+import { useLocale } from "@/components/LocaleProvider";
 
 const SearchButton = () => {
+  const { t } = useLocale();
   if (
     siteMetadata.search &&
     (siteMetadata.search.provider === "algolia" ||
@@ -12,7 +16,7 @@ const SearchButton = () => {
       siteMetadata.search.provider === "algolia" ? AlgoliaButton : KBarButton;
 
     return (
-      <SearchButtonWrapper aria-label="Search">
+      <SearchButtonWrapper aria-label={t("search")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

@@ -8,6 +8,9 @@ import type { Blog } from "contentlayer/generated";
 import Link from "@/components/Link";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizePosts } from "@/data/localizedPosts";
+import strings from "@/data/strings";
 
 interface PaginationProps {
   totalPages: number;
@@ -16,6 +19,7 @@ interface PaginationProps {
 interface ListLayoutProps {
   posts: CoreContent<Blog>[];
   title: string;
+  titleKey?: keyof typeof strings;
   initialDisplayPosts?: CoreContent<Blog>[];
   pagination?: PaginationProps;
 }
@@ -25,6 +29,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   const basePath = pathname.split("/")[1];
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
+  const { t } = useLocale();
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -34,7 +39,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             className="cursor-auto disabled:opacity-50"
             disabled={!prevPage}
           >
-            Previous
+            {t("previous")}
           </button>
         )}
         {prevPage && (
@@ -46,23 +51,23 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             }
             rel="prev"
           >
-            Previous
+            {t("previous")}
           </Link>
         )}
         <span>
-          {currentPage} of {totalPages}
+          {currentPage} {t("pageOf")} {totalPages}
         </span>
         {!nextPage && (
           <button
             className="cursor-auto disabled:opacity-50"
             disabled={!nextPage}
           >
-            Next
+            {t("next")}
           </button>
         )}
         {nextPage && (
           <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
+            {t("next")}
           </Link>
         )}
       </nav>
@@ -73,19 +78,23 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 export default function ListLayout({
   posts,
   title,
+  titleKey,
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState("");
-  const filteredBlogPosts = posts.filter((post) => {
+  const { locale, t } = useLocale();
+  const localizedPosts = localizePosts(posts, locale);
+  const localizedInitialPosts = localizePosts(initialDisplayPosts, locale);
+  const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
+  const filteredBlogPosts = localizedPosts.filter((post) => {
     const searchContent = post.title + post.summary + post.tags?.join(" ");
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());
   });
 
-  // If initialDisplayPosts exist, display it if no searchValue is specified
   const displayPosts =
-    initialDisplayPosts.length > 0 && !searchValue
-      ? initialDisplayPosts
+    localizedInitialPosts.length > 0 && !searchValue
+      ? localizedInitialPosts
       : filteredBlogPosts;
 
   return (
@@ -93,16 +102,16 @@ export default function ListLayout({
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            {title}
+            {titleKey ? t(titleKey) : title}
           </h1>
           <div className="relative max-w-lg">
             <label>
-              <span className="sr-only">Search articles</span>
+              <span className="sr-only">{t("searchArticles")}</span>
               <input
-                aria-label="Search articles"
+                aria-label={t("searchArticles")}
                 type="text"
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search articles"
+                placeholder={t("searchArticles")}
                 className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
               />
             </label>
@@ -123,17 +132,17 @@ export default function ListLayout({
           </div>
         </div>
         <ul>
-          {!filteredBlogPosts.length && "No posts found."}
+          {!filteredBlogPosts.length && t("noPosts")}
           {displayPosts.map((post) => {
             const { path, date, title, summary, tags } = post;
             return (
               <li key={path} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <dl>
-                    <dt className="sr-only">Published on</dt>
+                    <dt className="sr-only">{t("publishedOn")}</dt>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                       <time dateTime={date}>
-                        {formatDate(date, siteMetadata.locale)}
+                        {formatDate(date, dateLocale)}
                       </time>
                     </dd>
                   </dl>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import { formatDate } from "pliny/utils/formatDate";
 import { CoreContent } from "pliny/utils/contentlayer";
@@ -8,12 +10,14 @@ import PageTitle from "@/components/PageTitle";
 import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
+import { useLocale } from "@/components/LocaleProvider";
+import { localizePost } from "@/data/localizedPosts";
 
 interface LayoutProps {
   content: CoreContent<Blog>;
   children: ReactNode;
-  next?: { path: string; title: string };
-  prev?: { path: string; title: string };
+  next?: { path: string; title: string; slug?: string };
+  prev?: { path: string; title: string; slug?: string };
 }
 
 export default function PostLayout({
@@ -22,7 +26,16 @@ export default function PostLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { path, slug, date, title } = content;
+  const { locale, t } = useLocale();
+  const localizedContent = localizePost(content, locale);
+  const localizedNext = next
+    ? localizePost(next as typeof next & { slug: string }, locale)
+    : next;
+  const localizedPrev = prev
+    ? localizePost(prev as typeof prev & { slug: string }, locale)
+    : prev;
+  const { slug, date, title } = localizedContent;
+  const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
 
   return (
     <SectionContainer>
@@ -33,11 +46,9 @@ export default function PostLayout({
             <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
               <dl>
                 <div>
-                  <dt className="sr-only">Published on</dt>
+                  <dt className="sr-only">{t("publishedOn")}</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {formatDate(date, siteMetadata.locale)}
-                    </time>
+                    <time dateTime={date}>{formatDate(date, dateLocale)}</time>
                   </dd>
                 </div>
               </dl>
@@ -62,25 +73,25 @@ export default function PostLayout({
             )}
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-                {prev && prev.path && (
+                {localizedPrev && localizedPrev.path && (
                   <div className="pt-4 xl:pt-8">
                     <Link
-                      href={`/${prev.path}`}
+                      href={`/${localizedPrev.path}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`Previous post: ${prev.title}`}
+                      aria-label={`${t("previousPost")}: ${localizedPrev.title}`}
                     >
-                      &larr; {prev.title}
+                      &larr; {localizedPrev.title}
                     </Link>
                   </div>
                 )}
-                {next && next.path && (
+                {localizedNext && localizedNext.path && (
                   <div className="pt-4 xl:pt-8">
                     <Link
-                      href={`/${next.path}`}
+                      href={`/${localizedNext.path}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`Next post: ${next.title}`}
+                      aria-label={`${t("nextPost")}: ${localizedNext.title}`}
                     >
-                      {next.title} &rarr;
+                      {localizedNext.title} &rarr;
                     </Link>
                   </div>
                 )}

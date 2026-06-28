@@ -12,7 +12,7 @@ export default function BlogPage() {
   const pageNumber = 1;
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
+    POSTS_PER_PAGE * pageNumber,
   );
   const pagination = {
     currentPage: pageNumber,
@@ -25,6 +25,7 @@ export default function BlogPage() {
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
       title="All Posts"
+      titleKey="allPosts"
     />
   );
 }
