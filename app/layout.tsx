@@ -104,19 +104,19 @@ export default function RootLayout({
         content="#000"
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body className="antialiased">
         <ThemeProviders>
           <LocaleProvider>
             <Analytics
               analyticsConfig={siteMetadata.analytics as AnalyticsConfig}
             />
             <SectionContainer>
-              <div className="flex h-screen flex-col justify-between font-sans">
+              <div className="site-shell font-sans">
                 <SearchProvider
                   searchConfig={siteMetadata.search as SearchConfig}
                 >
                   <Header />
-                  <main className="mb-auto">{children}</main>
+                  <main>{children}</main>
                 </SearchProvider>
                 <Footer />
               </div>

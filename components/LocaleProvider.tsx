@@ -42,6 +42,7 @@ const LocaleContext = createContext<LocaleContextValue>({
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+  const [resolved, setResolved] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -52,6 +53,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
     setLocaleState(initialLocale);
     syncDocumentLocale(initialLocale);
+    setResolved(true);
   }, []);
 
   const setLocale = (nextLocale: Locale) => {
@@ -70,7 +72,11 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
+    <LocaleContext.Provider value={value}>
+      <div className={`locale-root ${resolved ? "is-ready" : ""}`}>
+        {children}
+      </div>
+    </LocaleContext.Provider>
   );
 }
 

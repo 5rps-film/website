@@ -4,6 +4,7 @@ interface Character {
   title: string;
   description: LocalizedString;
   imgSrc: string;
+  focal: string;
   position: LocalizedString;
 }
 
@@ -15,7 +16,8 @@ const projectsData: Character[] = [
       ja: `シリコンバレーでの過去の失敗を背負い、東京到着後の破産をきっかけに詐欺へ踏み込んでいく、倫理的に危ういエンジニア出身の創業者。`,
     },
     position: { en: "Startup Founder", ja: "スタートアップ創業者" },
-    imgSrc: "/static/characters/kakeru.jpg",
+    imgSrc: "/static/characters/kakeru-regenerated.png",
+    focal: "20% 24%",
   },
   {
     title: "Elizabeth Rohm",
@@ -24,7 +26,8 @@ const projectsData: Character[] = [
       ja: `東京のテック界で「セレブリティエンジニア」として知られながら、細かく管理する上司と手応えのない本業に苛立ち、怪しげなスタートアップへCTOとして加わる切れ味鋭いエンジニア。`,
     },
     position: { en: "CTO", ja: "CTO" },
-    imgSrc: "/static/characters/liz.jpg",
+    imgSrc: "/static/characters/liz-regenerated.png",
+    focal: "20% 24%",
   },
   {
     title: "Vijay Agarwal",
@@ -33,16 +36,8 @@ const projectsData: Character[] = [
       ja: `カケルの幼なじみで、サンフランシスコ時代の元チームメイト。優秀だが不安を抱え、彼とともに日本へ逃げてきたエンジニア。`,
     },
     position: { en: "Tech Lead", ja: "テックリード" },
-    imgSrc: "/static/characters/vijay.jpg",
-  },
-  {
-    title: "Yusuf Avcı",
-    description: {
-      en: `A high school exchange student and coding prodigy, juggling part-time work to make ends meet.`,
-      ja: `生活のためにアルバイトを掛け持ちしながらコードを書く、交換留学生の高校生プログラミング神童。`,
-    },
-    position: { en: "Full-stack Engineer", ja: "フルスタックエンジニア" },
-    imgSrc: "/static/characters/yusuf.jpg",
+    imgSrc: "/static/characters/vijay-regenerated.png",
+    focal: "20% 24%",
   },
   {
     title: "Sota Kanzaki",
@@ -51,7 +46,8 @@ const projectsData: Character[] = [
       ja: `誠実な日本人大学院生。アルバイトとして働きながら、難しいシステムを現実的な修正へ落とし込んでいく、将来有望なソフトウェアエンジニア。`,
     },
     position: { en: "Software Engineer", ja: "ソフトウェアエンジニア" },
-    imgSrc: "/static/characters/sota.jpg",
+    imgSrc: "/static/characters/sota-regenerated.png",
+    focal: "20% 24%",
   },
 ];
 

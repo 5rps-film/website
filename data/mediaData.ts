@@ -32,7 +32,7 @@ const projectsData: Project[] = [
       en: `We are also on LinkedIn.`,
       ja: `LinkedInにも公式ページがあります。`,
     },
-    imgSrc: "/static/images/linkedin.jpg",
+    imgSrc: "/static/images/linkedin-regenerated.png",
     href: "https://www.linkedin.com/company/5rps-film",
   },
 ];

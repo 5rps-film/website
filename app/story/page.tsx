@@ -1,36 +1,53 @@
+"use client";
+import Image from "next/image";
 import characterData from "@/data/characterData";
-import CharacterCard from "@/components/CharacterCard";
 import StorySynopsis from "@/components/StorySynopsis";
-import { genPageMetadata } from "app/seo";
-import LocalizedHeading from "@/components/LocalizedHeading";
-
-export const metadata = genPageMetadata({ title: "Story" });
+import { useLocale } from "@/components/LocaleProvider";
+import { pickLocalized } from "@/lib/i18n";
 
 export default function Story() {
+  const { locale, t } = useLocale();
   return (
     <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <LocalizedHeading labelKey="synopsis" />
+      <section className="page-intro">
+        <div className="page-intro-inner">
+          <div className="section-kicker">01 / {t("story")}</div>
+          <h1 className="section-title">
+            <span className="compound">{t("story")}</span>
+          </h1>
         </div>
-        <div className="container py-12">
+      </section>
+      <div className="page-content">
+        <div className="editorial-copy">
           <StorySynopsis />
         </div>
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <LocalizedHeading labelKey="characters" />
+        <div
+          id="characters"
+          className="section-kicker"
+          style={{ marginTop: 100 }}
+        >
+          02 / <span className="compound">{t("characters")}</span>
         </div>
-        <div className="container py-12">
-          <div className="-m-4 flex flex-wrap">
-            {characterData.map((d) => (
-              <CharacterCard
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                position={d.position}
+        <div className="story-character-list">
+          {characterData.slice(0, 4).map((character) => (
+            <article className="story-character" key={character.title}>
+              <Image
+                src={character.imgSrc}
+                alt={character.title}
+                width={982}
+                height={500}
               />
-            ))}
-          </div>
+              <div>
+                <h2>{character.title}</h2>
+                <p>{pickLocalized(character.description, locale)}</p>
+                <p style={{ color: "var(--wine)" }}>
+                  <span className="compound">
+                    {pickLocalized(character.position, locale)}
+                  </span>
+                </p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </>

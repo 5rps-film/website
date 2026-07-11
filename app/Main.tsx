@@ -1,119 +1,180 @@
 "use client";
 
-import Link from "@/components/Link";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
-import { formatDate } from "pliny/utils/formatDate";
-import HeaderImage from "@/data/header.jpg";
 import Image from "next/image";
-import NewsletterForm from "pliny/ui/NewsletterForm";
-import { Instagram } from "@/components/social-icons/icons";
+import Link from "@/components/Link";
+import { formatDate } from "pliny/utils/formatDate";
 import { useLocale } from "@/components/LocaleProvider";
+import siteMetadata from "@/data/siteMetadata";
 import { localizePosts } from "@/data/localizedPosts";
+import characterData from "@/data/characterData";
+import TrailerLink from "@/components/TrailerLink";
 
-const MAX_DISPLAY = 5;
-
-export default function Home({ posts }) {
+export default function Main({ posts }) {
   const { locale, t } = useLocale();
-  const localizedPosts = localizePosts(posts, locale);
+  const news = localizePosts(posts, locale).slice(0, 3);
   const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
-
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="flex flex-col items-center justify-center space-y-2 pb-8 pt-6 md:space-y-5">
-          <Image src={HeaderImage} alt="header" />
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {t("siteDescription")}
-          </p>
-          <div className="flex flex-col flex-wrap items-center justify-center">
-            <a
-              target="_blank"
-              href="https://instagram.com/5requestspersecond"
-              className="mx-5 my-2 mb-2 flex items-center justify-center rounded px-2 py-1 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-              style={{ backgroundColor: "#c13584" }}
-            >
-              <Instagram className="h-14 w-14 fill-current px-2 text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400" />
-              <span className="whitespace-nowrap px-2 text-xl">
-                {t("followInstagram")}
+    <main>
+      <section className="hero" aria-labelledby="film-title">
+        <div className="hero-content">
+          <div className="hero-copy">
+            <div className="eyebrow">Animated feature · 長編アニメーション</div>
+            <h1 className="hero-title" id="film-title">
+              <span className="hero-title-main">
+                <span className="title-group">秒速</span>
+                <span className="title-group">5リクエスト</span>
               </span>
-            </a>
+              <small>5 Requests Per Second</small>
+            </h1>
+            <p className="hero-premise">{t("synopsisBody").split("\n\n")[0]}</p>
+            <div className="hero-actions">
+              <a className="text-action" href="#trailer">
+                <span className="action-box">▶</span>
+                {locale === "ja" ? "予告編を見る" : "Watch trailer"}
+              </a>
+              <Link className="text-action" href="/story">
+                <span className="action-box">↘</span>
+                {t("story")}
+              </Link>
+            </div>
           </div>
         </div>
-
-        <h1 className="py-5 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          {t("news")}
-        </h1>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!localizedPosts.length && t("noPosts")}
-          {localizedPosts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post;
-            return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">{t("publishedOn")}</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>
-                          {formatDate(date, dateLocale)}
-                        </time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/news/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/news/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`${t("readMore")}: ${title}`}
-                        >
-                          {t("readMore")} &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      {localizedPosts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/news"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label={t("allPostsLink")}
-          >
-            {t("allPostsLink")} &rarr;
+        <div className="hero-rail" aria-hidden="true">
+          <div className="request-rail">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      </section>
+      <section className="section statement">
+        <div className="section-inner">
+          <div className="section-kicker">01 / request received</div>
+          <div className="statement-copy">
+            <h2 className="section-title">
+              {locale === "ja"
+                ? "言葉は、誰のものか。"
+                : "Who gets to own a sentence"}
+            </h2>
+            <div className="statement-synopsis">
+              {t("synopsisBody")
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+            </div>
+            <Link className="text-action" href="/story">
+              <span className="action-box">↗</span>
+              {t("learnMore")}
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="section split-section">
+        <div className="section-inner split-grid">
+          <div>
+            <div className="section-kicker">02 / the story</div>
+            <h2 className="section-title">{t("synopsis")}</h2>
+            <p>{t("synopsisBody")}</p>
+            <Link className="link-row" href="/story">
+              {t("story")} <span>↗</span>
+            </Link>
+          </div>
+          <figure className="art-frame">
+            <Image
+              src="/static/images/header-regenerated.png"
+              width={1450}
+              height={1088}
+              sizes="(max-width: 800px) 100vw, 55vw"
+              alt={
+                locale === "ja"
+                  ? "東京のオフィスで向き合う登場人物たち"
+                  : "The team facing one another in a Tokyo office"
+              }
+            />
+          </figure>
+        </div>
+      </section>
+      <section className="section characters-section" id="characters">
+        <div className="section-inner">
+          <div className="section-kicker">03 / the ensemble</div>
+          <h2 className="section-title">
+            <span className="compound">{t("characters")}</span>
+          </h2>
+          <div className="character-grid">
+            {characterData.slice(0, 4).map((character, index) => (
+              <Link
+                className="character-panel"
+                href="/story#characters"
+                key={character.title}
+              >
+                <span className="character-index">0{index + 1}</span>
+                <Image
+                  src={character.imgSrc}
+                  alt={character.title}
+                  width={1200}
+                  height={1310}
+                  sizes="(max-width: 800px) 50vw, 25vw"
+                  style={{ objectPosition: character.focal }}
+                />
+                <div className="character-panel-content">
+                  <h3>{character.title}</h3>
+                  <p>
+                    <span className="compound">
+                      {character.position[locale]}
+                    </span>
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section trailer-section" id="trailer">
+        <div className="section-inner trailer-wrap">
+          <TrailerLink />
+          <div>
+            <div className="section-kicker">04 / trailer 01</div>
+            <h2 className="section-title">{t("media")}</h2>
+            <p>
+              {locale === "ja"
+                ? "予告編と制作の記録。"
+                : "The trailer, and the record of making it."}
+            </p>
+            <Link className="text-action" href="/media">
+              <span className="action-box">↗</span>
+              {locale === "ja" ? "メディアページ" : "View media"}
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="section news-section">
+        <div className="section-inner">
+          <div className="section-kicker">05 / dispatches</div>
+          <h2 className="section-title">{t("news")}</h2>
+          <div className="news-list">
+            {news.map((post) => (
+              <Link
+                className="news-row"
+                href={`/news/${post.slug}`}
+                key={post.slug}
+              >
+                <time className="news-date" dateTime={post.date}>
+                  {formatDate(post.date, dateLocale)}
+                </time>
+                <span className="news-title">{post.title}</span>
+                <span className="news-arrow">↗</span>
+              </Link>
+            ))}
+          </div>
+          <Link className="text-action" href="/news">
+            <span className="action-box">↗</span>
+            {t("allPostsLink")}
           </Link>
         </div>
-      )}
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
-    </>
+      </section>
+    </main>
   );
 }

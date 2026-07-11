@@ -6,6 +6,8 @@ const tagText: Record<string, LocalizedString> = {
   x: { en: "x", ja: "X" },
   twitter: { en: "twitter", ja: "Twitter" },
   linkedin: { en: "linkedin", ja: "LinkedIn" },
+  production: { en: "production", ja: "制作" },
+  screenplay: { en: "screenplay", ja: "脚本" },
 };
 
 export function localizeTag(tag: string, locale: Locale): string {

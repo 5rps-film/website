@@ -41,6 +41,16 @@ const postText: Record<
       ja: "予告編を各プラットフォームで公開しました。",
     },
   },
+  "20260711-screenplay-complete": {
+    title: {
+      en: "Screenplay Complete",
+      ja: "脚本完成",
+    },
+    summary: {
+      en: "The screenplay for 5 Requests Per Second is complete, and storyboarding will begin next.",
+      ja: "『秒速5リクエスト』の脚本が完成し、次の工程となる絵コンテ制作へ進みます。",
+    },
+  },
 };
 
 export function localizePost<T extends PostLike>(post: T, locale: Locale): T {

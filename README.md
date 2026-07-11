@@ -19,8 +19,11 @@ The Makefile defaults to `pnpm`. You can override the package manager for a one-
 
 > **Windows tip:** Make sure you run these commands from an environment that provides GNU Make (e.g. Git Bash or WSL). If you prefer PowerShell, run the underlying `pnpm` commands directly.
 
-
 ### Development
+
+Before making changes, read [`AGENTS.md`](./AGENTS.md). It documents the local
+design system, bilingual typography rules, component conventions, and required
+validation for maintainers and coding agents.
 
 1. Run the development server
 

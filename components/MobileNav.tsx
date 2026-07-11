@@ -1,87 +1,131 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "./Link";
-import headerNavLinks from "@/data/headerNavLinks";
+import LocaleSwitch from "./LocaleSwitch";
 import { useLocale } from "@/components/LocaleProvider";
 
-const MobileNav = () => {
-  const [navShow, setNavShow] = useState(false);
+const links = [
+  ["/", "home"],
+  ["/story", "story"],
+  ["/media", "media"],
+  ["/news", "news"],
+  ["/about", "about"],
+] as const;
+
+export default function MobileNav() {
+  const [open, setOpen] = useState(false);
+  const openerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const { t } = useLocale();
 
-  const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        document.body.style.overflow = "auto";
-      } else {
-        // Prevent scrolling
-        document.body.style.overflow = "hidden";
-      }
-      return !status;
+  useEffect(() => {
+    if (!open) return;
+
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const background = [
+      document.querySelector("main"),
+      document.querySelector("footer"),
+    ].filter(
+      (element): element is HTMLElement => element instanceof HTMLElement,
+    );
+
+    background.forEach((element) => {
+      element.inert = true;
     });
-  };
+    closeRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+      background.forEach((element) => {
+        element.inert = false;
+      });
+      (previousFocus || openerRef.current)?.focus();
+    };
+  }, [open]);
 
   return (
     <>
       <button
+        ref={openerRef}
+        className="menu-button"
+        type="button"
+        aria-expanded={open}
+        aria-controls="mobile-menu"
         aria-label={t("toggleMenu")}
-        onClick={onToggleNav}
-        className="sm:hidden"
+        onClick={() => setOpen(!open)}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="h-8 w-8 text-gray-900 dark:text-gray-100"
-        >
-          <path
-            fillRule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clipRule="evenodd"
-          />
-        </svg>
+        {open ? "×" : "☰"}
       </button>
-      <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transform bg-white opacity-95 duration-300 ease-in-out dark:bg-gray-950 dark:opacity-[0.98] ${
-          navShow ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-end">
+      {open && (
+        <div
+          ref={dialogRef}
+          id="mobile-menu"
+          className="fixed inset-0 z-40 flex flex-col bg-[var(--paper)] px-6 pb-10 pt-24 text-[var(--ink)]"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t("toggleMenu")}
+        >
           <button
-            className="mr-8 mt-11 h-8 w-8"
+            ref={closeRef}
+            className="absolute right-5 top-5 min-h-[44px] min-w-[44px] border border-current text-2xl"
+            type="button"
+            onClick={() => setOpen(false)}
             aria-label={t("toggleMenu")}
-            onClick={onToggleNav}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+            ×
           </button>
-        </div>
-        <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
-              <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={onToggleNav}
-              >
-                {t(link.labelKey as Parameters<typeof t>[0])}
+          <div className="mb-10 text-xs uppercase tracking-[.18em] text-[var(--request-red)]">
+            {t("siteTitle")}
+          </div>
+          <nav
+            className="flex flex-col gap-5 text-4xl"
+            aria-label="Mobile navigation"
+          >
+            {links.map(([href, key], index) => (
+              <Link key={href} href={href} onClick={() => setOpen(false)}>
+                <span className="mr-4 text-sm text-[var(--request-red)]">
+                  0{index + 1}
+                </span>
+                {t(key)}
               </Link>
-            </div>
-          ))}
-        </nav>
-      </div>
+            ))}
+          </nav>
+          <div className="mobile-locale">
+            <span>{t("languageSelector")}</span>
+            <LocaleSwitch />
+          </div>
+        </div>
+      )}
     </>
   );
-};
-
-export default MobileNav;
+}

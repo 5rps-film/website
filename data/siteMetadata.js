@@ -9,7 +9,7 @@ const siteMetadata = {
   siteUrl: "https://5rps.jp",
   siteRepo: "https://github.com/akiyamasho/5rps-website",
   siteLogo: "/static/images/logo.png",
-  socialBanner: "/static/images/header.jpg",
+  socialBanner: "/static/images/header-regenerated.png",
   email: "contact@akiyamasho.com",
   discord: "https://discord.gg/cWae4TfR",
   instagram: "https://www.instagram.com/5requestspersecond",

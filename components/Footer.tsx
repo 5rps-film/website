@@ -1,28 +1,39 @@
 "use client";
 
-import Link from "./Link";
-import siteMetadata from "@/data/siteMetadata";
-import SocialIcon from "@/components/social-icons";
 import { useLocale } from "@/components/LocaleProvider";
+import { Discord, Instagram } from "@/components/social-icons/icons";
+import siteMetadata from "@/data/siteMetadata";
 
 export default function Footer() {
   const { t } = useLocale();
 
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
-          <SocialIcon kind="instagram" href={siteMetadata.instagram} size={6} />
-          <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-          <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-          <SocialIcon kind="discord" href={siteMetadata.discord} size={6} />
-        </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>{siteMetadata.author}</div>
-          <div>{` • `}</div>
-          <div>{`© ${new Date().getFullYear()}`}</div>
-          <div>{` • `}</div>
-          <Link href="/">{t("siteTitle")}</Link>
+    <footer className="footer">
+      <div className="footer-inner">
+        <p className="footer-title">
+          5RPS<span style={{ color: "var(--request-red)" }}>.</span>
+        </p>
+        <div className="footer-meta">
+          <span>{t("siteTitle")}</span>
+          <div className="footer-socials" aria-label="Social media">
+            <a
+              href={siteMetadata.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram aria-hidden="true" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href={siteMetadata.discord}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Discord aria-hidden="true" />
+              <span>Discord</span>
+            </a>
+          </div>
+          <span>© {new Date().getFullYear()} 5RPS</span>
         </div>
       </div>
     </footer>

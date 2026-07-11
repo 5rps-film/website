@@ -1,56 +1,59 @@
 "use client";
 
-import siteMetadata from "@/data/siteMetadata";
-import headerNavLinks from "@/data/headerNavLinks";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "./Link";
 import MobileNav from "./MobileNav";
-import ThemeSwitch from "./ThemeSwitch";
-import SearchButton from "./SearchButton";
 import LocaleSwitch from "./LocaleSwitch";
 import { useLocale } from "@/components/LocaleProvider";
 
-import { useTheme } from "next-themes";
+const links = [
+  ["/story", "story"],
+  ["/media", "media"],
+  ["/news", "news"],
+  ["/about", "about"],
+] as const;
 
-const THEME_DARK = "dark";
-
-const Header = () => {
-  const { theme } = useTheme();
+export default function Header() {
   const { t } = useLocale();
+  const pathname = usePathname();
+  const overlaysHero = pathname === "/";
+  const [solid, setSolid] = useState(false);
+
+  useEffect(() => {
+    if (!overlaysHero) {
+      setSolid(false);
+      return;
+    }
+
+    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.72);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [overlaysHero]);
 
   return (
-    <header className="flex items-center justify-between py-10">
-      <div>
-        <Link href="/" aria-label={t("siteTitle")}>
-          <div className="flex items-center justify-between">
-            {typeof siteMetadata.headerTitle === "string" ? (
-              <div className="hidden text-2xl font-semibold sm:block">
-                {t("siteTitle")}
-              </div>
-            ) : (
-              siteMetadata.headerTitle
-            )}
-          </div>
+    <header
+      className={`site-header ${overlaysHero ? "is-overlay" : "is-page-header"} ${solid ? "is-solid" : ""}`}
+    >
+      <div className="header-inner">
+        <Link className="wordmark" href="/" aria-label={t("siteTitle")}>
+          <span className="mark-title">{t("siteTitle")}</span>
         </Link>
-      </div>
-      <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-        {headerNavLinks
-          .filter((link) => link.href !== "/")
-          .map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
-            >
-              {t(link.labelKey as Parameters<typeof t>[0])}
+        <nav className="header-nav" aria-label="Primary navigation">
+          {links.map(([href, key]) => (
+            <Link key={href} href={href}>
+              {t(key)}
             </Link>
           ))}
-        <LocaleSwitch />
-        <SearchButton />
-        <ThemeSwitch />
-        <MobileNav />
+        </nav>
+        <div className="header-actions">
+          <div className="desktop-locale">
+            <LocaleSwitch />
+          </div>
+          <MobileNav />
+        </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
