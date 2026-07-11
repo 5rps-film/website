@@ -3,7 +3,7 @@ import {
   ComputedFields,
   makeSource,
 } from "contentlayer/source-files";
-import { writeFileSync } from "fs";
+import { readFileSync, readdirSync, writeFileSync } from "fs";
 import readingTime from "reading-time";
 import GithubSlugger from "github-slugger";
 import path from "path";
@@ -28,6 +28,26 @@ import { allCoreContent, sortPosts } from "pliny/utils/contentlayer.js";
 
 const root = process.cwd();
 const isProduction = process.env.NODE_ENV === "production";
+
+function updateGeneratedJsonImports(directory: string) {
+  readdirSync(directory, { withFileTypes: true }).forEach((entry) => {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      updateGeneratedJsonImports(entryPath);
+    } else if (entry.name.endsWith(".mjs")) {
+      const source = readFileSync(entryPath, "utf8");
+      const updated = source.replace(
+        / assert \{ type: (["'])json\1 \}/g,
+        " with { type: $1json$1 }",
+      );
+
+      if (updated !== source) {
+        writeFileSync(entryPath, updated);
+      }
+    }
+  });
+}
 
 const computedFields: ComputedFields = {
   readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
@@ -73,7 +93,7 @@ function createSearchIndex(allBlogs) {
   ) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+      JSON.stringify(allCoreContent(sortPosts(allBlogs))),
     );
     console.log("Local search index generated...");
   }
@@ -156,6 +176,7 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
+    updateGeneratedJsonImports(path.join(root, ".contentlayer", "generated"));
     const { allBlogs } = await importData();
     createTagCount(allBlogs);
     createSearchIndex(allBlogs);
