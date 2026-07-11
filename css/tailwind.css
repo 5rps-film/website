@@ -208,6 +208,65 @@ a {
 .menu-button {
   display: none;
 }
+.mobile-menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+  color: var(--ink);
+  padding: max(88px, calc(env(safe-area-inset-top) + 72px)) 24px
+    max(40px, calc(env(safe-area-inset-bottom) + 24px));
+  isolation: isolate;
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-menu-close {
+  position: fixed;
+  top: max(20px, calc(env(safe-area-inset-top) + 12px));
+  right: max(20px, calc(env(safe-area-inset-right) + 20px));
+  z-index: 1;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid currentColor;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.mobile-menu-title {
+  margin-bottom: 40px;
+  color: var(--request-red);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: var(--ink);
+  font-size: clamp(2.15rem, 12vw, 4rem);
+  line-height: 1.08;
+}
+.mobile-menu-nav a {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 14px;
+}
+.mobile-menu-nav span {
+  color: var(--request-red);
+  font-size: 0.875rem;
+  line-height: 1;
+}
 
 .request-rail {
   display: flex;

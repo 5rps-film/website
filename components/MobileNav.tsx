@@ -90,32 +90,25 @@ export default function MobileNav() {
         <div
           ref={dialogRef}
           id="mobile-menu"
-          className="fixed inset-0 z-40 flex flex-col bg-[var(--paper)] px-6 pb-10 pt-24 text-[var(--ink)]"
+          className="mobile-menu-panel"
           role="dialog"
           aria-modal="true"
           aria-label={t("toggleMenu")}
         >
           <button
             ref={closeRef}
-            className="absolute right-5 top-5 min-h-[44px] min-w-[44px] border border-current text-2xl"
+            className="mobile-menu-close"
             type="button"
             onClick={() => setOpen(false)}
             aria-label={t("toggleMenu")}
           >
             ×
           </button>
-          <div className="mb-10 text-xs uppercase tracking-[.18em] text-[var(--request-red)]">
-            {t("siteTitle")}
-          </div>
-          <nav
-            className="flex flex-col gap-5 text-4xl"
-            aria-label="Mobile navigation"
-          >
+          <div className="mobile-menu-title">{t("siteTitle")}</div>
+          <nav className="mobile-menu-nav" aria-label="Mobile navigation">
             {links.map(([href, key], index) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>
-                <span className="mr-4 text-sm text-[var(--request-red)]">
-                  0{index + 1}
-                </span>
+                <span>0{index + 1}</span>
                 {t(key)}
               </Link>
             ))}
