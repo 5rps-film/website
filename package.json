@@ -2,6 +2,7 @@
   "name": "tailwind-nextjs-starter-blog",
   "version": "2.1.0",
   "private": true,
+  "packageManager": "pnpm@9.15.2",
   "scripts": {
     "start": "next dev",
     "dev": "cross-env PORT=3000 next dev",
@@ -76,6 +77,6 @@
     ]
   },
   "engines": {
-    "node": "^20.0.0"
+    "node": "24.x"
   }
 }
