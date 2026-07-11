@@ -21,6 +21,23 @@ export default function Story() {
         </div>
       </section>
       <div className="page-content">
+        <figure className="story-lead-visual">
+          <Image
+            src="/static/images/key-visual-hearing-room.png"
+            alt={
+              locale === "ja"
+                ? "正式なヒアリングの席に座るリズとカケル"
+                : "Elizabeth and Kakeru seated at a formal hearing table"
+            }
+            width={1680}
+            height={945}
+            sizes="(max-width: 800px) 100vw, 1240px"
+            priority
+          />
+          <figcaption>
+            {locale === "ja" ? "キービジュアル 03" : "Key visual 03"}
+          </figcaption>
+        </figure>
         <div className="editorial-copy">
           <StorySynopsis />
         </div>
@@ -39,12 +56,12 @@ export default function Story() {
             <article className="story-character" key={character.title}>
               <Image
                 src={character.imgSrc}
-                alt={character.title}
+                alt={pickLocalized(character.name, locale)}
                 width={982}
                 height={500}
               />
               <div>
-                <h2>{character.title}</h2>
+                <h2>{pickLocalized(character.name, locale)}</h2>
                 <p>
                   <JapaneseLineBreak>
                     {pickLocalized(character.description, locale)}

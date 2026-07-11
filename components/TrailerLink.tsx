@@ -21,10 +21,10 @@ export default function TrailerLink() {
       aria-label={label}
     >
       <Image
-        src="/static/images/header-regenerated.png"
+        src="/static/images/key-visual-meeting-room.png"
         alt=""
-        width={1450}
-        height={1088}
+        width={1680}
+        height={945}
         sizes="(max-width: 800px) 100vw, 65vw"
       />
       <span className="play-mark" aria-hidden="true">

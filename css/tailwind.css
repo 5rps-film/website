@@ -484,7 +484,7 @@ a {
 .art-frame {
   margin: 0;
   overflow: hidden;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16/9;
   background: #d3c9bb;
 }
 .art-frame img {
@@ -748,6 +748,24 @@ a {
 .editorial-copy p {
   margin: 0 0 1.5em;
 }
+.story-lead-visual {
+  margin: 0 0 clamp(48px, 7vw, 88px);
+}
+.story-lead-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.story-lead-visual figcaption {
+  margin-top: 10px;
+  color: var(--graphite);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 .story-character-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -804,6 +822,56 @@ a {
   display: block;
   width: 100%;
   height: auto;
+}
+.official-visuals {
+  margin: clamp(72px, 10vw, 144px) 0 0;
+}
+.official-visuals-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.official-visuals-heading h2 {
+  margin: 0;
+  font-family: var(--font-space-grotesk), Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.official-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.official-visual {
+  margin: 0;
+  min-width: 0;
+}
+.official-visual:first-child {
+  grid-column: 1 / -1;
+  max-width: 980px;
+}
+.official-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper-hi);
+}
+.official-visual:not(:first-child) img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.official-visual figcaption {
+  margin-top: 10px;
+  color: var(--graphite);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 .media-links {
   margin-top: 64px;
@@ -1102,8 +1170,15 @@ a {
     grid-column: 1 / -1;
   }
   .story-character-list,
-  .credits-grid {
+  .credits-grid,
+  .official-visual-grid {
     grid-template-columns: 1fr;
+  }
+  .official-visuals-heading {
+    display: block;
+  }
+  .official-visuals-heading h2 {
+    margin-top: 14px;
   }
 }
 @media (max-width: 480px) {

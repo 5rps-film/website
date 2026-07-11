@@ -97,14 +97,14 @@ export default function Main({ posts }) {
           </div>
           <figure className="art-frame">
             <Image
-              src="/static/images/header-regenerated.png"
-              width={1450}
-              height={1088}
+              src="/static/images/key-visual-office-pull.png"
+              width={1680}
+              height={945}
               sizes="(max-width: 800px) 100vw, 55vw"
               alt={
                 locale === "ja"
-                  ? "東京のオフィスで向き合う登場人物たち"
-                  : "The team facing one another in a Tokyo office"
+                  ? "スピーチ後のオフィスでエリザベスに連れ出されるカケル"
+                  : "Elizabeth casually pulling Kakeru away after an office speech"
               }
             />
           </figure>
@@ -126,14 +126,14 @@ export default function Main({ posts }) {
                 <span className="character-index">0{index + 1}</span>
                 <Image
                   src={character.imgSrc}
-                  alt={character.title}
+                  alt={character.name[locale]}
                   width={1200}
                   height={1310}
                   sizes="(max-width: 800px) 50vw, 25vw"
                   style={{ objectPosition: character.focal }}
                 />
                 <div className="character-panel-content">
-                  <h3>{character.title}</h3>
+                  <h3>{character.name[locale]}</h3>
                   <p>
                     <span className="compound">
                       <JapaneseLineBreak>
