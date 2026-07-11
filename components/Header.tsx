@@ -6,6 +6,7 @@ import Link from "./Link";
 import MobileNav from "./MobileNav";
 import LocaleSwitch from "./LocaleSwitch";
 import { useLocale } from "@/components/LocaleProvider";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 const links = [
   ["/story", "story"],
@@ -43,7 +44,7 @@ export default function Header() {
         <nav className="header-nav" aria-label="Primary navigation">
           {links.map(([href, key]) => (
             <Link key={href} href={href}>
-              {t(key)}
+              <JapaneseLineBreak>{t(key)}</JapaneseLineBreak>
             </Link>
           ))}
         </nav>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale } from "@/components/LocaleProvider";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 export default function StorySynopsis() {
   const { t } = useLocale();
@@ -11,7 +12,7 @@ export default function StorySynopsis() {
         .split("\n\n")
         .map((paragraph) => (
           <p key={paragraph} className="mb-6 last:mb-0">
-            {paragraph}
+            <JapaneseLineBreak>{paragraph}</JapaneseLineBreak>
           </p>
         ))}
     </>

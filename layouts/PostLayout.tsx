@@ -11,6 +11,7 @@ import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 import { useLocale } from "@/components/LocaleProvider";
 import { localizePost } from "@/data/localizedPosts";
 import { localizeAuthor } from "@/data/localizedAuthors";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: "long",
@@ -54,7 +55,9 @@ export default function PostLayout({
           <time dateTime={date}>
             {new Date(date).toLocaleDateString(dateLocale, postDateTemplate)}
           </time>
-          <h1>{title}</h1>
+          <h1>
+            <JapaneseLineBreak>{title}</JapaneseLineBreak>
+          </h1>
         </header>
 
         <div className="post-layout">
@@ -105,7 +108,9 @@ export default function PostLayout({
                   <div>
                     <span>{t("previousArticle")}</span>
                     <Link href={`/${localizedPrev.path}`}>
-                      {localizedPrev.title}
+                      <JapaneseLineBreak>
+                        {localizedPrev.title}
+                      </JapaneseLineBreak>
                     </Link>
                   </div>
                 )}
@@ -113,7 +118,9 @@ export default function PostLayout({
                   <div>
                     <span>{t("nextArticle")}</span>
                     <Link href={`/${localizedNext.path}`}>
-                      {localizedNext.title}
+                      <JapaneseLineBreak>
+                        {localizedNext.title}
+                      </JapaneseLineBreak>
                     </Link>
                   </div>
                 )}

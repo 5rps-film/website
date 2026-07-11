@@ -1,4 +1,5 @@
 const { withContentlayer } = require("next-contentlayer");
+const path = require("path");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -82,6 +83,15 @@ module.exports = () => {
       ];
     },
     webpack: (config, options) => {
+      config.resolve.alias["@budoux/parser"] = path.resolve(
+        __dirname,
+        "node_modules/budoux/module/parser.js",
+      );
+      config.resolve.alias["@budoux/ja-model"] = path.resolve(
+        __dirname,
+        "node_modules/budoux/module/data/models/ja.js",
+      );
+
       config.module.rules.push({
         test: /\.svg$/,
         use: ["@svgr/webpack"],

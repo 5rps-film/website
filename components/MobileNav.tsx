@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "./Link";
 import LocaleSwitch from "./LocaleSwitch";
 import { useLocale } from "@/components/LocaleProvider";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 const links = [
   ["/", "home"],
@@ -109,7 +110,7 @@ export default function MobileNav() {
             {links.map(([href, key], index) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>
                 <span>0{index + 1}</span>
-                {t(key)}
+                <JapaneseLineBreak>{t(key)}</JapaneseLineBreak>
               </Link>
             ))}
           </nav>

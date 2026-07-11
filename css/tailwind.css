@@ -1004,6 +1004,10 @@ a {
   display: inline-block;
   white-space: nowrap;
 }
+.ja-phrase-break {
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
 [lang="ja"] body {
   font-family: "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", Meiryo,
     sans-serif;

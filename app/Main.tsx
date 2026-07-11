@@ -8,6 +8,7 @@ import siteMetadata from "@/data/siteMetadata";
 import { localizePosts } from "@/data/localizedPosts";
 import characterData from "@/data/characterData";
 import TrailerLink from "@/components/TrailerLink";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 export default function Main({ posts }) {
   const { locale, t } = useLocale();
@@ -26,7 +27,11 @@ export default function Main({ posts }) {
               </span>
               <small>5 Requests Per Second</small>
             </h1>
-            <p className="hero-premise">{t("synopsisBody").split("\n\n")[0]}</p>
+            <p className="hero-premise">
+              <JapaneseLineBreak>
+                {t("synopsisBody").split("\n\n")[0]}
+              </JapaneseLineBreak>
+            </p>
             <div className="hero-actions">
               <a className="text-action" href="#trailer">
                 <span className="action-box">▶</span>
@@ -54,15 +59,19 @@ export default function Main({ posts }) {
           <div className="section-kicker">01 / request received</div>
           <div className="statement-copy">
             <h2 className="section-title">
-              {locale === "ja"
-                ? "言葉は、誰のものか。"
-                : "Who gets to own a sentence"}
+              <JapaneseLineBreak>
+                {locale === "ja"
+                  ? "言葉は、誰のものか。"
+                  : "Who gets to own a sentence"}
+              </JapaneseLineBreak>
             </h2>
             <div className="statement-synopsis">
               {t("synopsisBody")
                 .split("\n\n")
                 .map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>
+                    <JapaneseLineBreak>{paragraph}</JapaneseLineBreak>
+                  </p>
                 ))}
             </div>
             <Link className="text-action" href="/story">
@@ -76,8 +85,12 @@ export default function Main({ posts }) {
         <div className="section-inner split-grid">
           <div>
             <div className="section-kicker">02 / the story</div>
-            <h2 className="section-title">{t("synopsis")}</h2>
-            <p>{t("synopsisBody")}</p>
+            <h2 className="section-title">
+              <JapaneseLineBreak>{t("synopsis")}</JapaneseLineBreak>
+            </h2>
+            <p>
+              <JapaneseLineBreak>{t("synopsisBody")}</JapaneseLineBreak>
+            </p>
             <Link className="link-row" href="/story">
               {t("story")} <span>↗</span>
             </Link>
@@ -123,7 +136,9 @@ export default function Main({ posts }) {
                   <h3>{character.title}</h3>
                   <p>
                     <span className="compound">
-                      {character.position[locale]}
+                      <JapaneseLineBreak>
+                        {character.position[locale]}
+                      </JapaneseLineBreak>
                     </span>
                   </p>
                 </div>
@@ -137,11 +152,15 @@ export default function Main({ posts }) {
           <TrailerLink />
           <div>
             <div className="section-kicker">04 / trailer 01</div>
-            <h2 className="section-title">{t("media")}</h2>
+            <h2 className="section-title">
+              <JapaneseLineBreak>{t("media")}</JapaneseLineBreak>
+            </h2>
             <p>
-              {locale === "ja"
-                ? "予告編と制作の記録。"
-                : "The trailer, and the record of making it."}
+              <JapaneseLineBreak>
+                {locale === "ja"
+                  ? "予告編と制作の記録。"
+                  : "The trailer, and the record of making it."}
+              </JapaneseLineBreak>
             </p>
             <Link className="text-action" href="/media">
               <span className="action-box">↗</span>
@@ -153,7 +172,9 @@ export default function Main({ posts }) {
       <section className="section news-section">
         <div className="section-inner">
           <div className="section-kicker">05 / dispatches</div>
-          <h2 className="section-title">{t("news")}</h2>
+          <h2 className="section-title">
+            <JapaneseLineBreak>{t("news")}</JapaneseLineBreak>
+          </h2>
           <div className="news-list">
             {news.map((post) => (
               <Link
@@ -164,7 +185,9 @@ export default function Main({ posts }) {
                 <time className="news-date" dateTime={post.date}>
                   {formatDate(post.date, dateLocale)}
                 </time>
-                <span className="news-title">{post.title}</span>
+                <JapaneseLineBreak className="news-title">
+                  {post.title}
+                </JapaneseLineBreak>
                 <span className="news-arrow">↗</span>
               </Link>
             ))}

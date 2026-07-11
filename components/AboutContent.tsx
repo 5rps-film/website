@@ -7,6 +7,7 @@ import { coreContent } from "pliny/utils/contentlayer";
 import { useLocale } from "@/components/LocaleProvider";
 import { components } from "@/components/MDXComponents";
 import { localizeAuthor } from "@/data/localizedAuthors";
+import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 
 export default function AboutContent({ authors }: { authors: Authors[] }) {
   const { locale } = useLocale();
@@ -20,7 +21,9 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
     occupation.split(" / ").map((part, index) => (
       <span key={part}>
         {index > 0 && " / "}
-        <span className="compound">{part}</span>
+        <span className="compound">
+          <JapaneseLineBreak>{part}</JapaneseLineBreak>
+        </span>
       </span>
     ));
 
@@ -29,11 +32,15 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
       <section className="page-intro">
         <div className="page-intro-inner">
           <div className="section-kicker">01 / production</div>
-          <h1 className="section-title">{heading}</h1>
+          <h1 className="section-title">
+            <JapaneseLineBreak>{heading}</JapaneseLineBreak>
+          </h1>
         </div>
       </section>
       <div className="page-content">
-        <p className="editorial-copy">{introduction}</p>
+        <p className="editorial-copy">
+          <JapaneseLineBreak>{introduction}</JapaneseLineBreak>
+        </p>
         <div className="credits-grid">
           {authors.map((author) => {
             const content = localizeAuthor(coreContent(author), locale);
