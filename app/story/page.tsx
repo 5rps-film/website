@@ -5,6 +5,7 @@ import StorySynopsis from "@/components/StorySynopsis";
 import { useLocale } from "@/components/LocaleProvider";
 import { pickLocalized } from "@/lib/i18n";
 import JapaneseLineBreak from "@/components/JapaneseLineBreak";
+import CharacterName from "@/components/CharacterName";
 
 export default function Story() {
   const { locale, t } = useLocale();
@@ -61,7 +62,9 @@ export default function Story() {
                 height={500}
               />
               <div>
-                <h2>{pickLocalized(character.name, locale)}</h2>
+                <h2>
+                  <CharacterName character={character} locale={locale} />
+                </h2>
                 <p>
                   <JapaneseLineBreak>
                     {pickLocalized(character.description, locale)}

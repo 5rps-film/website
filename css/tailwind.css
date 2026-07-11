@@ -553,6 +553,21 @@ a {
   font-size: clamp(1.5rem, 2.4vw, 2.4rem);
   font-weight: 500;
 }
+.character-name-group {
+  display: inline-block;
+  white-space: nowrap;
+}
+.character-name-group ruby {
+  ruby-align: center;
+  ruby-position: over;
+}
+.character-name-group rt {
+  font-family: "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", Meiryo,
+    sans-serif;
+  font-size: 0.34em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
 .character-panel p {
   margin: 7px 0 0;
   color: rgba(251, 248, 241, 0.75);

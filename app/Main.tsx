@@ -9,6 +9,7 @@ import { localizePosts } from "@/data/localizedPosts";
 import characterData from "@/data/characterData";
 import TrailerLink from "@/components/TrailerLink";
 import JapaneseLineBreak from "@/components/JapaneseLineBreak";
+import CharacterName from "@/components/CharacterName";
 
 export default function Main({ posts }) {
   const { locale, t } = useLocale();
@@ -133,7 +134,9 @@ export default function Main({ posts }) {
                   style={{ objectPosition: character.focal }}
                 />
                 <div className="character-panel-content">
-                  <h3>{character.name[locale]}</h3>
+                  <h3>
+                    <CharacterName character={character} locale={locale} />
+                  </h3>
                   <p>
                     <span className="compound">
                       <JapaneseLineBreak>
