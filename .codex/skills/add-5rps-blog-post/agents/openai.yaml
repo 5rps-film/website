@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add 5RPS Blog Post"
+  short_description: "Turn an unstructured folder into an EN/JA post"
+  default_prompt: "Use $add-5rps-blog-post to organize this folder and draft a bilingual production update."
