@@ -1,6 +1,6 @@
 ---
 name: add-5rps-blog-post
-description: Turn a user-provided folder of unstructured notes, images, GIFs, audio, and videos into a reviewed bilingual EN/JA production-update post for the 5 Requests Per Second website. Use when Codex must inventory and organize finished production material, select and prepare publishable media, draft or revise a Medium-like long-form news post in Sho's house style, update the repository's MDX and localization records, optionally upload approved derivatives to configured GCS storage, and validate both locales without publishing automatically.
+description: Turn a user-provided folder of unstructured notes, images, GIFs, audio, and videos into a reviewed bilingual EN/JA production-update post for the 5 Requests Per Second website. Use when Codex must inventory and organize finished production material, create visually lossless web-compressed media derivatives, draft or revise a Medium-like long-form news post in Sho's house style, update the repository's MDX and localization records, optionally upload approved derivatives to configured GCS storage, and validate both locales without publishing automatically.
 ---
 
 # Add a 5RPS blog post
@@ -12,8 +12,9 @@ Create one evidence-based bilingual production update from an explicit input fol
 1. Read the repository `AGENTS.md` completely.
 2. Read [references/repository-contract.md](references/repository-contract.md).
 3. Read [references/writing-style.md](references/writing-style.md).
-4. Read current posts in `data/news/`, `data/localizedPosts.ts`, and `data/localizedTags.ts` before drafting.
-5. Read media-component source before using nonstandard MDX elements. Never invent an MDX component.
+4. Read [references/media-compression.md](references/media-compression.md) before preparing any media.
+5. Read current posts in `data/news/`, `data/localizedPosts.ts`, and `data/localizedTags.ts` before drafting.
+6. Read media-component source before using nonstandard MDX elements. Never invent an MDX component.
 
 ## Establish scope
 
@@ -54,14 +55,18 @@ Prefer a focused post over a dump of every file. Exclude redundant media and exp
 ## Plan media
 
 - Preserve source files.
-- Prefer WebP for photographic or painted stills and PNG only when lossless detail or transparency requires it.
+- Create compressed web derivatives by default using the selected scripts in `/Users/computer/Desktop/dev/tools/Scripts`; follow [references/media-compression.md](references/media-compression.md).
+- Perform all conversion on temporary copies. Never run a compressor against the source folder.
+- Prefer the smallest verified derivative that remains visually faithful and preserves required dimensions, transparency, animation, duration, and audio.
 - Prefer an MP4 or WebM loop over a large GIF when the rendered component supports it.
 - Use broadly compatible H.264/AAC MP4 for direct browser playback.
 - Generate a poster image for video when possible.
 - Record accurate alt text, caption, credit, dimensions, duration, and source filename.
+- Record original and derivative byte sizes in the private media inventory.
 - Use content-hashed immutable object names when uploading.
 - Read [references/gcs-media.md](references/gcs-media.md) before any GCS action.
-- If GCS is not configured, leave explicit media placeholders in the draft or propose the upload plan. Do not fabricate URLs.
+- Use the configured `5rps-film-public-media` bucket and the post-prefix rules in that reference.
+- Never place unapproved or unpublished material in the bucket because every object is publicly readable.
 
 ## Draft English first
 
