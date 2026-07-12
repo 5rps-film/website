@@ -1,34 +1,295 @@
 ---
-title: Screenplay Complete
+title: The Human Thinks, the Agents Execute
 date: "2026-07-11"
 tags: ["production", "screenplay"]
 authors: ["s"]
 draft: false
-summary: The screenplay for 5 Requests Per Second is complete, and storyboarding will begin next.
+summary: We completed the screenplay for 5 Requests Per Second after rebuilding our writing process around a clear boundary between human direction and agent execution.
 ---
 
 <LocalizedContent locale="en">
 
-# The screenplay is complete.
+# The human thinks, the agents execute
 
-I have finished the screenplay for _5 Requests Per Second_. Next, I will begin storyboarding and translate the script into shots and sequences.
+We have completed the full-length screenplay for _5 Requests Per Second_. These are the events that followed the release of the [trailer on YouTube](https://www.youtube.com/watch?v=RHOlJCpDuPM).
 
-Thank you to everyone who has followed the project this far. We will share more as the film takes shape.
+<YouTube videoId="RHOlJCpDuPM" title="5 Requests Per Second official trailer" />
 
-**S<br />
-Writer / Director**
+Over the last several months, we finished the screenplay twice in two very different ways.
+
+The first pass was manual and rough. We wrote scenes, moved through the acts, and tried to solve the film directly on the page. Each scene took a long time. The `5rps-seisaku` production repository started in March after we moved the screenplay out of Notion. By early April, it held a complete first pass and the manual updates that followed.
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/manual-screenplay-pass-01.png"
+    width={1506}
+    height={1764}
+    alt="The first manual screenplay pass arranged by act, scene, and sequence in Notion."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    The first manual screenplay pass, organized in Notion.
+  </figcaption>
+</figure>
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/manual-screenplay-pass-02.png"
+    width={2732}
+    height={2048}
+    alt="A hand-drawn screenplay planning page with rough scene beats and notes."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>Working through the screenplay by hand.</figcaption>
+</figure>
+
+## Learning how much belongs on the page
+
+Coming from animation, one of the harder adjustments was learning how much visual detail belongs in a screenplay. Before this film, an idea could move more directly into storyboards and an animatic. Camera position, timing, body language, and the order of visual information could be worked out in images.
+
+A screenplay introduces another layer. If the writing is too sparse, the visual intention disappears before storyboarding begins. If every image is specified, the page becomes heavy and starts doing the storyboard's job too early.
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/animator-screenplay-detail-balance.png"
+    width={2284}
+    height={2158}
+    alt="Side-by-side editor diff showing a short screenplay action paragraph expanded into detailed blocking, props, reflections, and lighting."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    Working out how much visual direction belongs in the screenplay and how much
+    should wait for storyboarding.
+  </figcaption>
+</figure>
+
+Then, as the engineers we are, we tried applying the harness engineering expertise from our day jobs to the writing process. We built prompts for agents with separate jobs across the screenplay. They critiqued scenes, rewrote sequences, compressed pages, regenerated storyboard material, and ran repeated passes across the film.
+
+The agents could cover a lot of ground. They kept track of files, applied formatting rules, compared versions, and made hundreds of small changes without getting tired. The result didn't click with how we wanted the movie to be. The screenplay started to lose the things that were hardest to encode in a prompt: why a beat belonged in the film, how long a moment needed to sit, and whether a line sounded true when spoken by a person.
+
+The AI slop writing is real. In our experience, the agents couldn't capture our personal experiences, the films we've watched and interpreted, or the emotions and tension we imagined, no matter how detailed the prompts became. We reached the point where we kept saying, “We could have just written it by hand.”
+
+So we reverted the agent-driven screenplay changes. Returning to our own process still required another full read. We decided what the film needed scene by scene and wrote it again.
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/procreate-three-act-rewrite.png"
+    width={2732}
+    height={2048}
+    alt="A blurred Procreate canvas used to rework the film across all three acts."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    Reworking the film across all three acts in Procreate. Plot details have
+    been blurred.
+  </figcaption>
+</figure>
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/act-2-3-whiteboard.png"
+    width={4032}
+    height={2268}
+    alt="A wide physical whiteboard covered with blurred planning cards for Acts II and III."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    The working board for Acts II and III. Plot details have been blurred.
+  </figcaption>
+</figure>
+
+## Building a review surface around the screenplay
+
+The review app helped a lot during this pass. We wanted to read the film as a whole, leave precise comments, and move between the screenplay and its storyboard frames without flattening everything into one enormous document.
+
+We reorganized the production source into a directory tree the app could load directly. Each act contains its summary and ordered scene folders. Each scene contains ordered sequences, and each sequence keeps its screenplay, storyboard frames, and character references together. The app turns the screenplay into reviewable blocks such as action, dialogue, sluglines, and transitions, with the corresponding storyboard images in the same view.
+
+```text
+02_screenplay_storyboards/
+├── act-01-<act-slug>/
+│   ├── 01_act_summary.md
+│   └── scene-01-<scene-slug>/
+│       ├── 01_scene_summary.md
+│       └── sequence-01-<sequence-slug>/
+│           ├── screenplay.md
+│           ├── storyboards/
+│           └── char/
+```
+
+Comments remain separate from the screenplay source. A text comment records the source path, selected passage, and enough surrounding context to find it again. A storyboard comment points to the source file and image. This lets us rebuild the review view from the canonical production folders without losing the notes we still need to address.
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/screenplay-review-app.png"
+    width={3094}
+    height={1458}
+    alt="The local screenplay review app displaying dialogue, review comments, and sequence-local storyboard frames."
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    The local review app loads the screenplay and sequence-local storyboards
+    from the same source tree.
+  </figcaption>
+</figure>
+
+The later commit history changes character. Messages start saying things like “remove AI slop,” “human think, AI do,” “restore heart-to-heart for manual rewrite,” and “ban vague timing aphorisms.” That last commit also taught us the word “aphorism.”
+
+Those labels are blunt, but they describe the correction accurately.
+
+Codex remains a large part of our process. We use agents for research, assembling screenplay files, enforcing formatting, updating summaries, rendering documents, checking continuity, and flagging mechanical problems. We make the story decisions and write the scenes.
+
+That boundary took months to find. Agentic tools became most useful once we stopped asking them to supply the reason a scene should exist. They are effective production executors when the direction is already clear. When we handed over the direction itself, we got more pages and less of the film we wanted to show.
+
+The screenplay is now complete. Storyboarding comes next. We will carry the same principle into that stage: the human thinks, the agents execute. The initial drawings will most likely be manual, with agents helping us find useful film clips, books, and compositions to study while we keep improving the production platform.
+
+Visual work is also easier to share without giving away the screenplay. We look forward to posting production updates more regularly from here.
+
+Join us in the [_5 Requests Per Second_ Discord](https://discord.gg/cWae4TfR) to follow the production and continue the conversation.
 
 </LocalizedContent>
 
 <LocalizedContent locale="ja">
 
-# 脚本が完成しました。
+# 人間が考え、エージェントが実行する
 
-『秒速5リクエスト』の脚本を書き上げました。次は絵コンテ制作に入り、脚本を一つひとつ画面に落とし込んでいきます。
+『秒速5リクエスト』長編本編の脚本が完成しました。[予告編の公開](https://www.youtube.com/watch?v=RHOlJCpDuPM)後、数か月をかけて脚本を二度書き上げました。ただし、一度目と二度目では制作方法が大きく異なります。
 
-ここまで見守ってくださった皆さま、ありがとうございます。作品が形になっていく過程を、これからもお知らせします。
+<YouTube videoId="RHOlJCpDuPM" title="『秒速5リクエスト』公式予告編" />
 
-**S<br />
-脚本・監督**
+最初の稿は、手作業で最後まで書き進めた粗いものでした。シーンごとにページ上で映画を組み立て、全幕を通して一つずつ問題を解いていきました。Notionで書いていた脚本を移し、制作リポジトリ`5rps-seisaku`を作ったのは3月です。4月上旬には最初の全稿がそろい、その後も人の手で修正を重ねました。
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/manual-screenplay-pass-01.png"
+    width={1506}
+    height={1764}
+    alt="Notion上で幕、シーン、シークエンスごとに整理した最初の手書き脚本稿。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>Notionで整理した最初の脚本稿。</figcaption>
+</figure>
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/manual-screenplay-pass-02.png"
+    width={2732}
+    height={2048}
+    alt="シーンの流れとメモを手描きで整理した脚本制作ページ。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>手を動かしながら脚本を組み直しているところ。</figcaption>
+</figure>
+
+## 脚本にどこまで書くか
+
+アニメーション制作から脚本へ移る中で難しかったのは、画面の情報をどこまで文章に含めるかという判断でした。これまでは、アイデアを絵コンテやアニマティックへ直接移し、カメラ位置、間、人物の芝居、情報を見せる順番を画面で考えることができました。
+
+脚本では、その前に文章の工程が加わります。記述が少なすぎると、絵コンテに入る前に映像の意図が抜け落ちます。細部まで指定すると、今度はページが重くなり、脚本が絵コンテの仕事まで先取りしてしまいます。この加減を探ることが、最初の大きな課題でした。
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/animator-screenplay-detail-balance.png"
+    width={2284}
+    height={2158}
+    alt="短いアクション記述を、人物の配置、小道具、反射、照明まで含む詳細な文章へ直したエディターの差分画面。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    映像の指示を脚本にどこまで書き、何を絵コンテまで残すかを検討した差分。
+  </figcaption>
+</figure>
+
+次に、普段のエンジニアリング業務で扱っているハーネス設計を脚本制作にも応用しました。役割ごとにプロンプトを用意し、エージェントにシーンの批評、シークエンスの改稿、脚本の圧縮、絵コンテ素材の再生成、全編の反復レビューを任せました。
+
+エージェントは大量の作業を進められます。ファイルを追跡し、書式をそろえ、複数の版を比較し、細かな変更を何百件でも処理できます。しかし、出来上がった脚本は、自分たちが作りたい映画から離れていきました。なぜその瞬間が必要なのか。どれだけ間を置くべきか。人物が実際に口にしたとき、その台詞が本当に聞こえるか。こうした判断は、細かなプロンプトを書いても渡しきれませんでした。
+
+いわゆる「AIっぽい文章」も、はっきり表れました。自分たちの経験、観てきた映画とその受け止め方、場面に込めたい感情や緊張は、説明を増やすだけでは再現できません。「これなら最初から自分たちで書けばよかった」と何度も口にするようになりました。
+
+そこで、エージェントによる脚本の変更をすべて戻しました。全編をもう一度読み、映画に必要なものをシーンごとに判断し、改めて人の手で書き直しました。
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/procreate-three-act-rewrite.png"
+    width={2732}
+    height={2048}
+    alt="全三幕を組み直すために使った、内容をぼかしたProcreateのキャンバス。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    Procreateで全三幕を組み直しました。物語の詳細はぼかしています。
+  </figcaption>
+</figure>
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/act-2-3-whiteboard.png"
+    width={4032}
+    height={2268}
+    alt="第二幕と第三幕の計画カードを並べた横長のホワイトボード。内容はぼかされている。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    第二幕と第三幕の作業用ボード。物語の詳細はぼかしています。
+  </figcaption>
+</figure>
+
+## 脚本を読むための制作環境
+
+二度目の執筆では、レビュー用アプリが大きな助けになりました。長大な一つの文書にまとめることなく、映画全体を通して読み、該当箇所に正確なコメントを残し、脚本と絵コンテを行き来できる環境が必要だったためです。
+
+制作データは、アプリが直接読み込めるディレクトリ構成へ整理しました。各幕に概要と順番付きのシーンフォルダを置き、その中にシークエンスを並べています。シークエンスごとに脚本、絵コンテ、キャラクター資料をまとめました。アプリ上では、脚本をアクション、台詞、柱書き、トランジションなどの単位で確認し、対応する絵コンテも同じ画面で見られます。
+
+```text
+02_screenplay_storyboards/
+├── act-01-<act-slug>/
+│   ├── 01_act_summary.md
+│   └── scene-01-<scene-slug>/
+│       ├── 01_scene_summary.md
+│       └── sequence-01-<sequence-slug>/
+│           ├── screenplay.md
+│           ├── storyboards/
+│           └── char/
+```
+
+コメントは脚本の本文と分けて保存しています。文章へのコメントには、元ファイル、選択した箇所、再び位置を特定するための前後の文脈を記録します。絵コンテへのコメントには、元ファイルと画像の参照先を残します。制作フォルダから表示を作り直しても、検討中の指摘を失わない仕組みです。
+
+<figure>
+  <Image
+    src="/static/images/news/20260711-screenplay-complete/screenplay-review-app.png"
+    width={3094}
+    height={1458}
+    alt="台詞、レビューコメント、シークエンスごとの絵コンテを表示したローカル脚本レビューアプリ。"
+    className="h-auto w-full"
+    sizes="(max-width: 768px) 100vw, 768px"
+  />
+  <figcaption>
+    同じ制作ツリーから脚本とシークエンスごとの絵コンテを読み込むローカルレビューアプリ。
+  </figcaption>
+</figure>
+
+この頃から、コミット履歴の言葉も変わりました。「remove AI slop」「human think, AI do」「restore heart-to-heart for manual rewrite」「ban vague timing aphorisms」といった記録が並びます。最後のコミットでは、Codexから`aphorism`という英単語も教わりました。
+
+率直な表現ですが、制作方法の修正をよく表しています。
+
+Codexを含むエージェントは、現在も制作に深く関わっています。調査、脚本ファイルの結合、書式の統一、概要の更新、文書の書き出し、連続性の確認、機械的な問題の検出などを任せています。物語を判断し、シーンと台詞を書くのは私たちです。
+
+この境界を見つけるまでに数か月かかりました。シーンが存在する理由までエージェントに任せず、進む方向が決まった後の制作作業を任せる。そのとき、エージェントは最も力を発揮しました。方向そのものを渡した時期には、ページ数が増える一方で、自分たちが見せたい映画から遠ざかっていました。
+
+次の工程は絵コンテです。ここでも「人間が考え、エージェントが実行する」という方針を引き継ぎます。最初の絵は手で描き、エージェントには参考となる映画の映像、書籍、構図の調査や、制作環境の改善を手伝ってもらう予定です。
+
+脚本執筆中と比べ、これからの映像作業は内容を明かさずに共有しやすくなります。今後は制作の様子を、もう少し定期的にお届けします。
+
+制作の続きは、[*5 Requests Per Second*のDiscord](https://discord.gg/cWae4TfR)でもご覧いただけます。
 
 </LocalizedContent>

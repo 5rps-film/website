@@ -86,7 +86,11 @@ Do not force an introduction-body-conclusion template, table of contents, recap,
 
 Write a matching Japanese post from the same facts and intent, not a sentence-by-sentence translation. Use natural public production Japanese in restrained `です・ます` form unless the source is explicitly a signed personal message. Name the completed action first and use precise terms such as `脚本`, `絵コンテ`, `予告編`, and `公開`.
 
+Keep the production voice collective. Prefer natural subject omission, using `私たち` only when the actor would otherwise be unclear; never imply team size. Preserve technical density, candid opinions, and dry humor instead of explaining them away. Adapt paragraph rhythm for Japanese and avoid explanatory overtranslation. Use established vocabulary such as `アニマティック`, `演出`, `リポジトリ`, `レビューアプリ`, and `エージェント`. Keep headings concise and natural.
+
 Keep EN and JA equivalent in claims, media, credits, and links. Small structural differences are acceptable when they improve natural reading. Protect short Japanese semantic units with existing `.compound` or authored no-break spans. Never apply no-wrap behavior to long prose.
+
+End both locales with a restrained invitation to the project Discord using `https://discord.gg/cWae4TfR`; it must be the final line of the post.
 
 ## Implement the post
 

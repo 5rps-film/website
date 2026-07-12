@@ -43,12 +43,12 @@ const postText: Record<
   },
   "20260711-screenplay-complete": {
     title: {
-      en: "Screenplay Complete",
-      ja: "脚本完成",
+      en: "The Human Thinks, the Agents Execute",
+      ja: "人間が考え、エージェントが実行する",
     },
     summary: {
-      en: "The screenplay for 5 Requests Per Second is complete, and storyboarding will begin next.",
-      ja: "『秒速5リクエスト』の脚本が完成し、次の工程となる絵コンテ制作へ進みます。",
+      en: "We completed the screenplay after rebuilding our workflow around human creative judgment and agent execution.",
+      ja: "人間が創作を判断し、エージェントが制作を実行する形へ工程を組み直し、脚本を完成させました。",
     },
   },
 };

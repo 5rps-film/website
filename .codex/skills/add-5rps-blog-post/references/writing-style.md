@@ -86,6 +86,12 @@ Usually replace them with the actual action: `upload`, `compare`, `draw`, `test`
 
 ## Japanese check
 
+- Keep the public production voice collective. Omit the subject where Japanese remains clear; use `私たち` sparingly and never reveal or imply team size.
+- Rebuild each paragraph around natural Japanese rhythm instead of matching English sentence boundaries.
+- Preserve technical density, candidness, and dry humor. Do not add explanations merely because the source is English.
+- Prefer established production terms: `脚本`, `絵コンテ`, `アニマティック`, `演出`, `リポジトリ`, `レビューアプリ`, and `エージェント`.
+- Keep headings short, concrete, and idiomatic rather than translating English headings mechanically.
+- The final line must be the canonical Discord invitation using `https://discord.gg/cWae4TfR`.
 - Does the post read as Japanese written for a production audience rather than translated English?
 - Does it announce the completed action before commentary?
 - Does it use precise production vocabulary and `です・ます` consistently?
