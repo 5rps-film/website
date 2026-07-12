@@ -98,8 +98,9 @@ End both locales with a restrained invitation to the project Discord using `http
 2. Add localized list title and summary to `data/localizedPosts.ts`.
 3. Add only genuinely new public tags to `data/localizedTags.ts`.
 4. Use existing media and link components. If the required rich-media surface does not exist, implement the smallest reusable accessible component in scope, then test it in both locales.
-5. For external links, use the repository's accessible new-tab behavior and bilingual labels where required.
-6. Keep the post as a draft unless the user clearly asks for publication-ready state.
+5. When an `Image` component backed by Next.js `next/image` receives an external URL, verify that its host and path are allowed by `next.config.js` `images.remotePatterns`. Add the narrowest required pattern in the same change; a successful direct object request does not prove that the Next.js optimizer can load it.
+6. For external links, use the repository's accessible new-tab behavior and bilingual labels where required.
+7. Keep the post as a draft unless the user clearly asks for publication-ready state.
 
 ## Run editorial checks
 
@@ -132,6 +133,8 @@ pnpm build
 ```
 
 When browser QA is available, inspect EN and JA at 320 to 360 px, 768 to 800 px, and 1280 px or wider. Check media loading, captions, controls, focus, Japanese wrapping, and horizontal overflow. State clearly when rendered browser QA was unavailable.
+
+For every remote image rendered through Next.js `next/image`, request at least one generated `/_next/image?url=...` optimizer URL and require an HTTP 200 response. Verify the underlying object URL separately. Treat `INVALID_IMAGE_OPTIMIZE_REQUEST`, a broken-image icon, or alt text replacing the image as a failed validation even when the source object returns 200.
 
 ## Hand off
 

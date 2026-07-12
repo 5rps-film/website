@@ -47,6 +47,8 @@ Inspect `components/MDXComponents.tsx` before authoring. Only names registered t
 - work on narrow mobile screens;
 - keep captions and credits localizable.
 
+For remote images, inspect the actual rendering component. If it wraps Next.js `next/image`, every external host must be present in `next.config.js` `images.remotePatterns`, narrowed by pathname when practical. The rendered browser URL will normally use `/_next/image`; this is the optimizer proxy, not evidence that the source stopped pointing to GCS. Validate both the direct source URL and the generated optimizer URL.
+
 Use native controls and `playsInline` for direct video. Default `preload` to `metadata`; do not eagerly download every video in a long post.
 
 ## Git and publication

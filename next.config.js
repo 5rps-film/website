@@ -72,6 +72,11 @@ module.exports = () => {
           protocol: "https",
           hostname: "picsum.photos",
         },
+        {
+          protocol: "https",
+          hostname: "storage.googleapis.com",
+          pathname: "/5rps-film-public-media/**",
+        },
       ],
     },
     async headers() {

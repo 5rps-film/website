@@ -64,6 +64,7 @@ Never discover or broaden IAM policy as a side effect of drafting. Never place a
 - Do not overwrite an existing hashed object with different bytes.
 - Remove sensitive EXIF and location metadata unless it is intentionally public.
 - Verify the public URL with a HEAD request and confirm content type, content length, cache control, and browser accessibility.
+- When the website renders the object with Next.js `next/image`, also add or verify a narrow `images.remotePatterns` entry for `storage.googleapis.com` and the configured bucket path. After deployment, require a successful `/_next/image` optimizer response; direct GCS HTTP 200 alone is insufficient.
 
 Use the browser-facing form:
 
