@@ -1,7 +1,10 @@
+"use client";
+
 /* eslint-disable jsx-a11y/anchor-has-content */
 import Link from "next/link";
 import type { LinkProps } from "next/link";
 import { AnchorHTMLAttributes } from "react";
+import YouTubeModal, { isTrailerYouTubeUrl } from "./YouTubeModal";
 
 const CustomLink = ({
   href,
@@ -16,6 +19,11 @@ const CustomLink = ({
 
   if (isAnchorLink) {
     return <a href={href} {...rest} />;
+  }
+
+  if (typeof href === "string" && isTrailerYouTubeUrl(href)) {
+    const { children, className } = rest;
+    return <YouTubeModal className={className}>{children}</YouTubeModal>;
   }
 
   return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />;
