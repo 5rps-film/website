@@ -43,8 +43,8 @@ const postText: Record<
   },
   "20260711-screenplay-complete": {
     title: {
-      en: "The Human Thinks, the Agents Execute",
-      ja: "人間が考え、エージェントが実行する",
+      en: "5RPS Full Movie Screenplay Completed: The Human Thinks, the Agents Execute",
+      ja: "『秒速5リクエスト』長編映画脚本完成：人間が考え、エージェントが実行する",
     },
     summary: {
       en: "We completed the screenplay after rebuilding our workflow around human creative judgment and agent execution.",
