@@ -5,6 +5,7 @@ import TagsPageContent from "@/components/TagsPageContent";
 export const metadata = genPageMetadata({
   title: "Tags",
   description: "News and updates from 5 Requests Per Second",
+  path: "/tags",
 });
 
 export default async function Page() {

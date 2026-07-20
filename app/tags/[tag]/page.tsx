@@ -16,8 +16,9 @@ export async function generateMetadata({
   return genPageMetadata({
     title: tag,
     description: `${siteMetadata.title} ${tag} tagged content`,
+    path: `/tags/${encodeURIComponent(tag)}`,
     alternates: {
-      canonical: "./",
+      canonical: `${siteMetadata.siteUrl}/tags/${encodeURIComponent(tag)}`,
       types: {
         "application/rss+xml": `${siteMetadata.siteUrl}/tags/${tag}/feed.xml`,
       },
@@ -41,7 +42,10 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   const filteredPosts = allCoreContent(
     sortPosts(
       allBlogs.filter(
-        (post) => post.tags && post.tags.map((t) => slug(t)).includes(tag),
+        (post) =>
+          !post.draft &&
+          post.tags &&
+          post.tags.map((t) => slug(t)).includes(tag),
       ),
     ),
   );

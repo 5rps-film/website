@@ -15,7 +15,10 @@ const generateRssItem = (config, post) => `
     ${post.summary && `<description>${escape(post.summary)}</description>`}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${config.email} (${config.author})</author>
-    ${post.tags && post.tags.map((t) => `<category>${t}</category>`).join("")}
+    ${
+      post.tags &&
+      post.tags.map((t) => `<category>${escape(t)}</category>`).join("")
+    }
   </item>
 `;
 
@@ -37,20 +40,24 @@ const generateRss = (config, posts, page = "feed.xml") => `
   </rss>
 `;
 
+const normalizeXml = (xml) => xml.replace(/^[ \t]+$/gm, "").trimStart();
+
 async function generateRSS(config, allBlogs, page = "feed.xml") {
   const publishPosts = allBlogs.filter((post) => post.draft !== true);
   // RSS for blog post
   if (publishPosts.length > 0) {
-    const rss = generateRss(config, sortPosts(publishPosts));
+    const rss = normalizeXml(generateRss(config, sortPosts(publishPosts)));
     writeFileSync(`./public/${page}`, rss);
   }
 
   if (publishPosts.length > 0) {
     for (const tag of Object.keys(tagData)) {
-      const filteredPosts = allBlogs.filter((post) =>
+      const filteredPosts = publishPosts.filter((post) =>
         post.tags.map((t) => GithubSlugger.slug(t)).includes(tag),
       );
-      const rss = generateRss(config, filteredPosts, `tags/${tag}/${page}`);
+      const rss = normalizeXml(
+        generateRss(config, filteredPosts, `tags/${tag}/${page}`),
+      );
       const rssPath = path.join("public", "tags", tag);
       mkdirSync(rssPath, { recursive: true });
       writeFileSync(path.join(rssPath, page), rss);

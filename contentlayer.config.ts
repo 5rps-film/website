@@ -93,7 +93,9 @@ function createSearchIndex(allBlogs) {
   ) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs))),
+      JSON.stringify(
+        allCoreContent(sortPosts(allBlogs.filter((post) => !post.draft))),
+      ),
     );
     console.log("Local search index generated...");
   }
@@ -120,16 +122,43 @@ export const Blog = defineDocumentType(() => ({
     ...computedFields,
     structuredData: {
       type: "json",
-      resolve: (doc) => ({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
-      }),
+      resolve: (doc) => {
+        const images = Array.isArray(doc.images)
+          ? doc.images
+          : doc.images
+            ? [doc.images]
+            : [siteMetadata.socialBanner];
+        const canonicalUrl =
+          doc.canonicalUrl ||
+          `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`;
+
+        return {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: doc.title,
+          datePublished: doc.date,
+          dateModified: doc.lastmod || doc.date,
+          description: doc.summary,
+          image: images.map((image) =>
+            new URL(image, `${siteMetadata.siteUrl}/`).toString(),
+          ),
+          mainEntityOfPage: canonicalUrl,
+          url: canonicalUrl,
+          inLanguage: ["en", "ja"],
+          publisher: {
+            "@type": "Organization",
+            "@id": `${siteMetadata.siteUrl}/#organization`,
+            name: siteMetadata.title,
+            logo: {
+              "@type": "ImageObject",
+              url: new URL(
+                siteMetadata.siteLogo,
+                `${siteMetadata.siteUrl}/`,
+              ).toString(),
+            },
+          },
+        };
+      },
     },
   },
 }));

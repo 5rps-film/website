@@ -5,10 +5,17 @@ import { genPageMetadata } from "app/seo";
 
 const POSTS_PER_PAGE = 5;
 
-export const metadata = genPageMetadata({ title: "News" });
+export const metadata = genPageMetadata({
+  title: "News",
+  description:
+    "Production notes, releases, and official updates from the animated feature film 5 Requests Per Second / 秒速5リクエスト.",
+  path: "/news",
+});
 
 export default function BlogPage() {
-  const posts = allCoreContent(sortPosts(allBlogs));
+  const posts = allCoreContent(
+    sortPosts(allBlogs.filter((post) => !post.draft)),
+  );
   const pageNumber = 1;
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),

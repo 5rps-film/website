@@ -1,33 +1,32 @@
-
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>5 Requests Per Second</title>
-      <link>https://5rps.jp/news</link>
-      <description>Official website for the animated film 5 Requests Per Second</description>
+      <link>https://www.5rps.jp/news</link>
+      <description>Official bilingual website for the animated feature film 5 Requests Per Second / 秒速5リクエスト.</description>
       <language>en-us</language>
       <managingEditor>contact@akiyamasho.com (秋山翔・kino.io)</managingEditor>
       <webMaster>contact@akiyamasho.com (秋山翔・kino.io)</webMaster>
-      <lastBuildDate>Tue, 02 Sep 2025 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://5rps.jp/tags/twitter/feed.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Thu, 11 Dec 2025 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://www.5rps.jp/tags/twitter/feed.xml" rel="self" type="application/rss+xml"/>
 
   <item>
-    <guid>https://5rps.jp/news/20250902-first-clip-x-linkedin</guid>
-    <title>First Clip and X/LinkedIn</title>
-    <link>https://5rps.jp/news/20250902-first-clip-x-linkedin</link>
-    <description>The first teaser clip is live, and our X and LinkedIn pages are now open.</description>
-    <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
-    <author>contact@akiyamasho.com (秋山翔・kino.io)</author>
-    <category>x</category><category>twitter</category><category>linkedin</category><category>launch</category>
-  </item>
-
-  <item>
-    <guid>https://5rps.jp/news/20251211-trailer</guid>
+    <guid>https://www.5rps.jp/news/20251211-trailer</guid>
     <title>Trailer Release</title>
-    <link>https://5rps.jp/news/20251211-trailer</link>
+    <link>https://www.5rps.jp/news/20251211-trailer</link>
     <description>The trailer is now live on all platforms.</description>
     <pubDate>Thu, 11 Dec 2025 00:00:00 GMT</pubDate>
     <author>contact@akiyamasho.com (秋山翔・kino.io)</author>
     <category>x</category><category>twitter</category><category>linkedin</category><category>instagram</category><category>launch</category>
+  </item>
+
+  <item>
+    <guid>https://www.5rps.jp/news/20250902-first-clip-x-linkedin</guid>
+    <title>First Clip and X/LinkedIn</title>
+    <link>https://www.5rps.jp/news/20250902-first-clip-x-linkedin</link>
+    <description>The first teaser clip is live, and our X and LinkedIn pages are now open.</description>
+    <pubDate>Tue, 02 Sep 2025 00:00:00 GMT</pubDate>
+    <author>contact@akiyamasho.com (秋山翔・kino.io)</author>
+    <category>x</category><category>twitter</category><category>linkedin</category><category>launch</category>
   </item>
 
     </channel>

@@ -3,12 +3,13 @@ const siteMetadata = {
   title: "5 Requests Per Second",
   author: "秋山翔・kino.io",
   headerTitle: "5 Requests Per Second",
-  description: "Official website for the animated film 5 Requests Per Second",
+  description:
+    "Official bilingual website for the animated feature film 5 Requests Per Second / 秒速5リクエスト.",
   language: "en-us",
   theme: "system", // system, dark or light
-  siteUrl: "https://5rps.jp",
+  siteUrl: "https://www.5rps.jp",
   siteRepo: "https://github.com/akiyamasho/5rps-website",
-  siteLogo: "/static/images/logo.png",
+  siteLogo: "/static/favicons/android-chrome-512x512.png",
   socialBanner: "/static/images/header-regenerated.png",
   email: "contact@akiyamasho.com",
   discord: "https://discord.gg/cWae4TfR",

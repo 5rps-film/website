@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: { slug: string[] };
 }): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join("/"));
-  const post = allBlogs.find((p) => p.slug === slug);
+  const post = allBlogs.find((p) => p.slug === slug && !p.draft);
   const authorList = post?.authors || ["s"];
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author);
@@ -44,6 +44,8 @@ export async function generateMetadata({
   const publishedAt = new Date(post.date).toISOString();
   const modifiedAt = new Date(post.lastmod || post.date).toISOString();
   const authors = authorDetails.map((author) => author.name);
+  const canonicalUrl =
+    post.canonicalUrl || `${siteMetadata.siteUrl}/news/${post.slug}`;
   let imageList = [siteMetadata.socialBanner];
   if (post.images) {
     imageList = typeof post.images === "string" ? [post.images] : post.images;
@@ -57,15 +59,19 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.summary,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
       siteName: siteMetadata.title,
       locale: "en_US",
+      alternateLocale: ["ja_JP"],
       type: "article",
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
-      url: "./",
+      url: canonicalUrl,
       images: ogImages,
       authors: authors.length > 0 ? authors : [siteMetadata.author],
     },
@@ -73,13 +79,15 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.summary,
-      images: imageList,
+      images: ogImages,
     },
   };
 }
 
 export const generateStaticParams = async () => {
-  const paths = allBlogs.map((p) => ({ slug: p.slug.split("/") }));
+  const paths = allBlogs
+    .filter((post) => !post.draft)
+    .map((p) => ({ slug: p.slug.split("/") }));
 
   return paths;
 };
@@ -87,7 +95,8 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join("/"));
   // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs));
+  const publishedPosts = allBlogs.filter((post) => !post.draft);
+  const sortedCoreContents = allCoreContent(sortPosts(publishedPosts));
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
   if (postIndex === -1) {
     return notFound();
@@ -95,7 +104,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   const prev = sortedCoreContents[postIndex + 1];
   const next = sortedCoreContents[postIndex - 1];
-  const post = allBlogs.find((p) => p.slug === slug) as Blog;
+  const post = publishedPosts.find((p) => p.slug === slug) as Blog;
   const authorList = post?.authors || ["s"];
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author);
@@ -116,7 +125,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <Layout
         content={mainContent}

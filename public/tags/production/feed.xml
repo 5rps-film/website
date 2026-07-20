@@ -1,20 +1,19 @@
-
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>5 Requests Per Second</title>
-      <link>https://5rps.jp/news</link>
-      <description>Official website for the animated film 5 Requests Per Second</description>
+      <link>https://www.5rps.jp/news</link>
+      <description>Official bilingual website for the animated feature film 5 Requests Per Second / 秒速5リクエスト.</description>
       <language>en-us</language>
       <managingEditor>contact@akiyamasho.com (秋山翔・kino.io)</managingEditor>
       <webMaster>contact@akiyamasho.com (秋山翔・kino.io)</webMaster>
       <lastBuildDate>Sat, 11 Jul 2026 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://5rps.jp/tags/production/feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://www.5rps.jp/tags/production/feed.xml" rel="self" type="application/rss+xml"/>
 
   <item>
-    <guid>https://5rps.jp/news/20260711-screenplay-complete</guid>
-    <title>Screenplay Complete</title>
-    <link>https://5rps.jp/news/20260711-screenplay-complete</link>
-    <description>The screenplay for 5 Requests Per Second is complete, and storyboarding will begin next.</description>
+    <guid>https://www.5rps.jp/news/20260711-screenplay-complete</guid>
+    <title>5RPS Full Movie Screenplay Completed: The Human Thinks, the Agents Execute</title>
+    <link>https://www.5rps.jp/news/20260711-screenplay-complete</link>
+    <description>We successfully completed the full-length screenplay after a manual first pass, an unsuccessful agent-driven rewrite, and a second human-led draft supported by production agents.</description>
     <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
     <author>contact@akiyamasho.com (秋山翔・kino.io)</author>
     <category>production</category><category>screenplay</category>

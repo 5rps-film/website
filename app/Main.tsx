@@ -16,7 +16,7 @@ export default function Main({ posts }) {
   const news = localizePosts(posts, locale).slice(0, 3);
   const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
   return (
-    <main>
+    <>
       <section className="hero" aria-labelledby="film-title">
         <div className="hero-content">
           <div className="hero-copy">
@@ -201,6 +201,6 @@ export default function Main({ posts }) {
           </Link>
         </div>
       </section>
-    </main>
+    </>
   );
 }

@@ -28,14 +28,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
-    url: "./",
+    url: siteMetadata.siteUrl,
     siteName: siteMetadata.title,
     images: [siteMetadata.socialBanner],
     locale: "en_US",
+    alternateLocale: ["ja_JP"],
     type: "website",
   },
   alternates: {
-    canonical: "./",
+    canonical: siteMetadata.siteUrl,
     types: {
       "application/rss+xml": `${siteMetadata.siteUrl}/feed.xml`,
     },
@@ -56,6 +57,43 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [siteMetadata.socialBanner],
   },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteMetadata.siteUrl}/#organization`,
+      name: siteMetadata.title,
+      url: siteMetadata.siteUrl,
+      logo: new URL(siteMetadata.siteLogo, siteMetadata.siteUrl).toString(),
+      sameAs: [siteMetadata.instagram, siteMetadata.discord],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteMetadata.siteUrl}/#website`,
+      name: siteMetadata.title,
+      alternateName: "秒速5リクエスト",
+      url: siteMetadata.siteUrl,
+      description: siteMetadata.description,
+      inLanguage: ["en", "ja"],
+      publisher: { "@id": `${siteMetadata.siteUrl}/#organization` },
+    },
+    {
+      "@type": "Movie",
+      "@id": `${siteMetadata.siteUrl}/#film`,
+      name: siteMetadata.title,
+      alternateName: "秒速5リクエスト",
+      url: siteMetadata.siteUrl,
+      description: siteMetadata.description,
+      image: new URL(
+        siteMetadata.socialBanner,
+        siteMetadata.siteUrl,
+      ).toString(),
+      inLanguage: ["en", "ja"],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -103,8 +141,13 @@ export default function RootLayout({
         media="(prefers-color-scheme: dark)"
         content="#000"
       />
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         <ThemeProviders>
           <LocaleProvider>
             <Analytics
