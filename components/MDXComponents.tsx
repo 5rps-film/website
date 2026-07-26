@@ -7,6 +7,7 @@ import CustomLink from "./Link";
 import TableWrapper from "./TableWrapper";
 import LocalizedContent from "./LocalizedContent";
 import YouTube from "./YouTube";
+import Video from "./Video";
 
 export const components: MDXComponents = {
   Image,
@@ -17,4 +18,5 @@ export const components: MDXComponents = {
   BlogNewsletterForm,
   LocalizedContent,
   YouTube,
+  Video,
 };

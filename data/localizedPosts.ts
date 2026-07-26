@@ -51,6 +51,16 @@ const postText: Record<
       ja: "人間が創作を判断し、エージェントが制作を実行する形へ工程を組み直し、脚本を完成させました。",
     },
   },
+  "20260726-storyboarding-in-progress": {
+    title: {
+      en: "Storyboarding in Progress: From Screenplay Notes to an Animatic",
+      ja: "絵コンテ制作中：脚本のメモからCTへ",
+    },
+    summary: {
+      en: "We are moving from director-curated visual notes and location research into rough grayscale boards, while testing where video models lose continuity.",
+      ja: "監督が選んだ参考資料とロケーション調査からグレースケールのラフコンテへ進み、動画モデルが連続性を失う箇所も検証しています。",
+    },
+  },
 };
 
 export function localizePost<T extends PostLike>(post: T, locale: Locale): T {

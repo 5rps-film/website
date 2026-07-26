@@ -15,6 +15,7 @@ Create one evidence-based bilingual production update from an explicit input fol
 4. Read [references/media-compression.md](references/media-compression.md) before preparing any media.
 5. Read current posts in `data/news/`, `data/localizedPosts.ts`, and `data/localizedTags.ts` before drafting.
 6. Read media-component source before using nonstandard MDX elements. Never invent an MDX component.
+7. When a session moves from screenplay notes through rough boards and video-model research toward an animatic, read [references/storyboarding-progress-example.md](references/storyboarding-progress-example.md).
 
 ## Establish scope
 

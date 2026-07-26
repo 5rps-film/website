@@ -28,6 +28,8 @@ The reference articles use talk context, named systems such as Google Cloud, Ver
 
 Do not use em dashes in authored EN or JA prose. Hyphens inside established compounds and source identifiers are allowed.
 
+Do not use semicolons in published prose. Split the thought into sentences or use a comma where grammatically correct. Semicolons required by source code or structured data are outside this writing rule.
+
 Never use these phrases or close formulaic variants:
 
 - `It is important to note that`
@@ -89,7 +91,7 @@ Usually replace them with the actual action: `upload`, `compare`, `draw`, `test`
 - Keep the public production voice collective. Omit the subject where Japanese remains clear; use `私たち` sparingly and never reveal or imply team size.
 - Rebuild each paragraph around natural Japanese rhythm instead of matching English sentence boundaries.
 - Preserve technical density, candidness, and dry humor. Do not add explanations merely because the source is English.
-- Prefer established production terms: `脚本`, `絵コンテ`, `アニマティック`, `演出`, `リポジトリ`, `レビューアプリ`, and `エージェント`.
+- Prefer established production terms: `脚本`, `絵コンテ`, `CT`, `演出`, `リポジトリ`, `レビューアプリ`, and `エージェント`. Use `アニマティック` only when explaining the Western-production term for CT.
 - Keep headings short, concrete, and idiomatic rather than translating English headings mechanically.
 - The final line must be the canonical Discord invitation using `https://discord.gg/cWae4TfR`.
 - Does the post read as Japanese written for a production audience rather than translated English?

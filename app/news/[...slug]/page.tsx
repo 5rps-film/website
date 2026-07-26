@@ -24,6 +24,7 @@ const layouts = {
   PostLayout,
   PostBanner,
 };
+const canPreviewDrafts = process.env.NODE_ENV !== "production";
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,9 @@ export async function generateMetadata({
   params: { slug: string[] };
 }): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join("/"));
-  const post = allBlogs.find((p) => p.slug === slug && !p.draft);
+  const post = allBlogs.find(
+    (p) => p.slug === slug && (!p.draft || canPreviewDrafts),
+  );
   const authorList = post?.authors || ["s"];
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author);
@@ -94,17 +97,19 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join("/"));
-  // Filter out drafts in production
   const publishedPosts = allBlogs.filter((post) => !post.draft);
   const sortedCoreContents = allCoreContent(sortPosts(publishedPosts));
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
-  if (postIndex === -1) {
+  const post = allBlogs.find(
+    (candidate) =>
+      candidate.slug === slug && (!candidate.draft || canPreviewDrafts),
+  ) as Blog | undefined;
+  if (!post) {
     return notFound();
   }
 
-  const prev = sortedCoreContents[postIndex + 1];
-  const next = sortedCoreContents[postIndex - 1];
-  const post = publishedPosts.find((p) => p.slug === slug) as Blog;
+  const prev = postIndex >= 0 ? sortedCoreContents[postIndex + 1] : undefined;
+  const next = postIndex >= 0 ? sortedCoreContents[postIndex - 1] : undefined;
   const authorList = post?.authors || ["s"];
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author);

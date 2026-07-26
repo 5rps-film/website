@@ -8,6 +8,8 @@ const tagText: Record<string, LocalizedString> = {
   linkedin: { en: "linkedin", ja: "LinkedIn" },
   production: { en: "production", ja: "制作" },
   screenplay: { en: "screenplay", ja: "脚本" },
+  storyboarding: { en: "storyboarding", ja: "絵コンテ" },
+  animatic: { en: "animatic", ja: "アニマティック" },
 };
 
 export function localizeTag(tag: string, locale: Locale): string {
