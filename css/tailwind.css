@@ -1078,11 +1078,13 @@ a {
 }
 .post-authors,
 .post-tags,
+.post-share,
 .post-pagination {
   padding-bottom: 28px;
   border-bottom: 1px solid var(--rule);
 }
 .post-tags,
+.post-share,
 .post-pagination {
   padding-top: 28px;
 }
@@ -1111,6 +1113,7 @@ a {
   color: var(--wine);
 }
 .post-tags h2,
+.post-share h2,
 .post-pagination span {
   display: block;
   margin: 0 0 10px;
@@ -1119,6 +1122,40 @@ a {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+.post-share-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.post-share-link {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  background: var(--paper-hi);
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.post-share-link:hover,
+.post-share-link:focus-visible {
+  border-color: var(--wine);
+  background: var(--wine);
+  color: var(--paper-hi);
+}
+.post-share-link:focus-visible {
+  outline: 2px solid var(--request-red);
+  outline-offset: 3px;
 }
 .post-tags > div {
   display: flex;

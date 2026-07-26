@@ -34,6 +34,7 @@ const strings = {
   previousPost: { en: "Previous post", ja: "前の記事" },
   nextPost: { en: "Next post", ja: "次の記事" },
   backToNews: { en: "Back to news list", ja: "ニュース一覧へ戻る" },
+  shareArticle: { en: "Share this article", ja: "この記事をシェア" },
   search: { en: "Search", ja: "検索" },
   searchArticles: { en: "Search articles", ja: "記事を検索" },
   toggleMenu: { en: "Toggle menu", ja: "メニューを切り替える" },

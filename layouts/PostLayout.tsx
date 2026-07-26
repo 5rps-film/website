@@ -12,6 +12,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { localizePost } from "@/data/localizedPosts";
 import { localizeAuthor } from "@/data/localizedAuthors";
 import JapaneseLineBreak from "@/components/JapaneseLineBreak";
+import ArticleShareButtons from "@/components/ArticleShareButtons";
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: "long",
@@ -43,9 +44,10 @@ export default function PostLayout({
   const localizedPrev = prev
     ? localizePost(prev as typeof prev & { slug: string }, locale)
     : prev;
-  const { path, date, title, tags } = localizedContent;
+  const { path, date, title, tags, canonicalUrl } = localizedContent;
   const basePath = path.split("/")[0];
   const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
+  const shareUrl = canonicalUrl || `${siteMetadata.siteUrl}/${path}`;
 
   return (
     <>
@@ -101,6 +103,8 @@ export default function PostLayout({
                 </div>
               </section>
             )}
+
+            <ArticleShareButtons title={title} url={shareUrl} />
 
             {(localizedNext || localizedPrev) && (
               <nav className="post-pagination" aria-label="Article pagination">
