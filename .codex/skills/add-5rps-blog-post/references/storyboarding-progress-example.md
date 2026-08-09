@@ -27,6 +27,6 @@ Use this pattern when a supplied session follows a film from screenplay notes in
 
 ## Approval-gated LinkedIn adaptation
 
-After the director approves the blog, use the LinkedIn skill to write a 120–180 word company-page summary within its stated limit. Preserve the production update, one practical lesson, the next step, the canonical article link, and the Discord invitation.
+After the director approves the blog, use the LinkedIn skill to write a 120–180 word company-page summary within its stated limit. Start with the production hook, place the canonical article URL on its own line immediately after that first paragraph, then continue with one practical lesson and the next step. End with the Discord invitation. Do not repeat or defer the article URL near the end.
 
 Choose two to four upload images from the strongest non-generated evidence first: director-curated visual notes, the researched-location shot map, thumbnails, and rough grayscale boards. Avoid AI-generated frames and failure examples unless the director specifically approves them as necessary to the LinkedIn point. Stage the draft and images for manual approval. Do not publish automatically.
