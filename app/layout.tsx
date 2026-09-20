@@ -1,9 +1,7 @@
 import "css/tailwind.css";
-import "pliny/search/algolia.css";
 
 import { Space_Grotesk } from "next/font/google";
 import { Analytics, AnalyticsConfig } from "pliny/analytics";
-import { SearchProvider, SearchConfig } from "pliny/search";
 import Header from "@/components/Header";
 import SectionContainer from "@/components/SectionContainer";
 import Footer from "@/components/Footer";
@@ -37,9 +35,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteMetadata.siteUrl,
-    types: {
-      "application/rss+xml": `${siteMetadata.siteUrl}/feed.xml`,
-    },
   },
   robots: {
     index: true,
@@ -155,12 +150,8 @@ export default function RootLayout({
             />
             <SectionContainer>
               <div className="site-shell font-sans">
-                <SearchProvider
-                  searchConfig={siteMetadata.search as SearchConfig}
-                >
-                  <Header />
-                  <main>{children}</main>
-                </SearchProvider>
+                <Header />
+                <main>{children}</main>
                 <Footer />
               </div>
             </SectionContainer>

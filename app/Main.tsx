@@ -2,19 +2,14 @@
 
 import Image from "next/image";
 import Link from "@/components/Link";
-import { formatDate } from "pliny/utils/formatDate";
 import { useLocale } from "@/components/LocaleProvider";
-import siteMetadata from "@/data/siteMetadata";
-import { localizePosts } from "@/data/localizedPosts";
 import characterData from "@/data/characterData";
 import TrailerLink from "@/components/TrailerLink";
 import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 import CharacterName from "@/components/CharacterName";
 
-export default function Main({ posts }) {
+export default function Main() {
   const { locale, t } = useLocale();
-  const news = localizePosts(posts, locale).slice(0, 3);
-  const dateLocale = locale === "ja" ? "ja-JP" : siteMetadata.locale;
   return (
     <>
       <section className="hero" aria-labelledby="film-title">
@@ -170,35 +165,6 @@ export default function Main({ posts }) {
               {locale === "ja" ? "メディアページ" : "View media"}
             </Link>
           </div>
-        </div>
-      </section>
-      <section className="section news-section">
-        <div className="section-inner">
-          <div className="section-kicker">05 / dispatches</div>
-          <h2 className="section-title">
-            <JapaneseLineBreak>{t("news")}</JapaneseLineBreak>
-          </h2>
-          <div className="news-list">
-            {news.map((post) => (
-              <Link
-                className="news-row"
-                href={`/news/${post.slug}`}
-                key={post.slug}
-              >
-                <time className="news-date" dateTime={post.date}>
-                  {formatDate(post.date, dateLocale)}
-                </time>
-                <JapaneseLineBreak className="news-title">
-                  {post.title}
-                </JapaneseLineBreak>
-                <span className="news-arrow">↗</span>
-              </Link>
-            ))}
-          </div>
-          <Link className="text-action" href="/news">
-            <span className="action-box">↗</span>
-            {t("allPostsLink")}
-          </Link>
         </div>
       </section>
     </>

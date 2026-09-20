@@ -16,7 +16,7 @@ repository. The film-production repository exposes this checkout through its
 
 - Next.js 14 App Router, React, and TypeScript
 - Tailwind CSS with the film-specific design system in `css/tailwind.css`
-- Contentlayer and MDX for bilingual production news
+- Contentlayer and MDX for authored film content
 - Vercel deployment from `main`
 - Umami analytics when `NEXT_UMAMI_ID` is configured
 
@@ -52,29 +52,17 @@ make dev
 
 - `app/`: routes, page composition, route metadata, robots, and sitemap
 - `components/`: reusable interface and interaction components
-- `layouts/`: news-post and listing layouts
 - `css/tailwind.css`: shared visual system and responsive rules
-- `data/news/`: bilingual MDX news sources
-- `data/localizedPosts.ts`: localized news-list titles and summaries
-- `data/localizedTags.ts`: localized public tag labels
 - `data/siteMetadata.js`: canonical host and site-wide metadata
 - `public/static/images/`: public film imagery
-- `scripts/rss.mjs`: RSS and tag-feed generation
+- Production journals and news for 5RPS live on the [Maru-Ani journal](https://maru-ani.jp/en/journal?filter=5rps), with 5RPS-specific titles and tags.
 
-## Search and generated outputs
+## Generated outputs
 
 The canonical host is `https://www.5rps.jp`. Canonical URLs, Open Graph data,
-JSON-LD, `robots.txt`, the sitemap, and RSS feeds must all use that host.
-
-`pnpm build` generates the Contentlayer documents and then refreshes these
-tracked public artifacts:
-
-- `public/feed.xml`
-- `public/search.json`
-- `public/tags/*/feed.xml`
-
-Draft posts must remain absent from public routes, pagination, search, RSS,
-tag feeds, and the sitemap.
+JSON-LD, `robots.txt`, and the sitemap must use that host. The film microsite
+does not publish journals, news, tags, search, or RSS; those routes redirect to
+the filtered 5RPS journal on Maru-Ani.
 
 ## Validation
 
@@ -86,8 +74,8 @@ pnpm exec tsc --noEmit
 pnpm build
 ```
 
-The build currently emits the homepage, Story, Media, News, About, Tags,
-individual news posts, pagination, `robots.txt`, and `sitemap.xml`.
+The build currently emits the homepage, Story, Media, About, `robots.txt`, and
+`sitemap.xml`.
 
 ## Deployment
 

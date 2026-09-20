@@ -11,7 +11,6 @@ import JapaneseLineBreak from "@/components/JapaneseLineBreak";
 const links = [
   ["/story", "story"],
   ["/media", "media"],
-  ["/news", "news"],
   ["/about", "about"],
 ] as const;
 

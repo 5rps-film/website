@@ -10,7 +10,6 @@ const links = [
   ["/", "home"],
   ["/story", "story"],
   ["/media", "media"],
-  ["/news", "news"],
   ["/about", "about"],
 ] as const;
 

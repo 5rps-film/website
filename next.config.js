@@ -87,6 +87,59 @@ module.exports = () => {
         },
       ];
     },
+    async redirects() {
+      const journalIndex = "https://maru-ani.jp/en/journal?filter=5rps";
+      const articleRedirects = [
+        "20250101-instagram-release",
+        "20250902-first-clip-x-linkedin",
+        "20251211-trailer",
+        "20260711-screenplay-complete",
+        "20260726-storyboarding-in-progress",
+      ].map((slug) => ({
+        source: `/news/${slug}`,
+        destination: `https://maru-ani.jp/en/journal/${slug}`,
+        permanent: true,
+      }));
+
+      return [
+        ...articleRedirects,
+        {
+          source: "/news",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/news/page/:page",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/news/:path*",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/tags",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/tags/:path*",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/feed.xml",
+          destination: journalIndex,
+          permanent: true,
+        },
+        {
+          source: "/search.json",
+          destination: journalIndex,
+          permanent: true,
+        },
+      ];
+    },
     webpack: (config, options) => {
       config.resolve.alias["@budoux/parser"] = path.resolve(
         __dirname,
