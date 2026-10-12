@@ -19,7 +19,8 @@ existing 5RPS identity and authored content; do not copy its assets or copy.
 
 The opening uses existing cleared 5RPS imagery behind an English title arranged
 as three alternating lines, or Japanese title in the authored 秒速 / 5リクエスト
-groups. The second language remains a readable translation. Trailer follows
+groups, both left-aligned. Japanese copy uses a consistent left edge.
+The second language remains a readable translation. Trailer follows
 immediately, then a single synopsis section and a spacious character gallery.
 Keep warm paper, charcoal, restrained red and the existing Space Grotesk / Mincho
 font system. Replace boxy action icons with plain directional arrows and rules.
@@ -42,3 +43,11 @@ an honest still, not fabricated video footage.
 Preserve bilingual authored content, canonical metadata, existing film media,
 YouTube new-tab trailer playback and Maru-Ani journal ownership. No new media,
 dependencies, deployment configuration, public domain or film facts.
+
+## Film-specific copy
+
+Use only 5RPS content. The owner corrected the earlier restoration of
+“Who gets to own a sentence” / “言葉は、誰のものか。” on 12 October 2026:
+that line belongs to TEGAKI, and must not appear in 5RPS public copy. Its
+presence in earlier website Git history was not proof of correct attribution.
+Use the verified 5RPS synopsis and production information instead.

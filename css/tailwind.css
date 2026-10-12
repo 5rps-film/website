@@ -1246,7 +1246,7 @@ a {
   line-height: 1.1;
 }
 .opening-title-ja .title-mask:last-child {
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 .opening-bottom {
@@ -1859,4 +1859,15 @@ a {
   .opening-image {
     object-position: 65% center;
   }
+}
+
+/* Japanese reads from one consistent left edge, including the full film title. */
+[lang="ja"] .opening-title .title-mask,
+[lang="ja"] .opening-status,
+[lang="ja"] .ensemble-position,
+[lang="ja"] .trailer-new-tab {
+  text-align: left;
+}
+[lang="ja"] .opening-title .title-mask {
+  padding-left: 0;
 }

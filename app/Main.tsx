@@ -51,13 +51,6 @@ export default function Main() {
             ))}
           </h1>
           <div className="opening-bottom">
-            <p className="opening-statement">
-              <JapaneseLineBreak>
-                {locale === "ja"
-                  ? "言葉は、誰のものか。"
-                  : "Who gets to own a sentence"}
-              </JapaneseLineBreak>
-            </p>
             <div className="opening-actions">
               <a className="film-action" href="#trailer">
                 {locale === "ja" ? "予告編を見る" : "Watch trailer"}
@@ -110,11 +103,7 @@ export default function Main() {
             id="synopsis-heading"
             data-reveal
           >
-            <JapaneseLineBreak>
-              {locale === "ja"
-                ? "言葉は、誰のものか。"
-                : "Who gets to own a sentence"}
-            </JapaneseLineBreak>
+            <JapaneseLineBreak>{t("synopsis")}</JapaneseLineBreak>
           </h2>
           <div className="story-composition">
             <figure className="story-wide-image" data-reveal="image">
