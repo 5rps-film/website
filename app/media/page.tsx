@@ -52,18 +52,16 @@ export default function Media() {
     <>
       <section className="page-intro">
         <div className="page-intro-inner">
-          <div className="section-kicker">01 / {t("media")}</div>
-          <h1 className="section-title">
+          <h1 className="section-title" data-reveal>
             <JapaneseLineBreak>{t("media")}</JapaneseLineBreak>
           </h1>
         </div>
       </section>
       <div className="page-content">
-        <div className="media-feature">
+        <div className="media-feature" data-reveal>
           <TrailerLink />
           <div>
-            <div className="section-kicker">Trailer 01</div>
-            <h2 className="section-title">
+            <h2 className="section-title" data-reveal>
               <JapaneseLineBreak>
                 {locale === "ja" ? "予告編を公開中。" : "The trailer is live."}
               </JapaneseLineBreak>
@@ -77,10 +75,13 @@ export default function Media() {
             </p>
           </div>
         </div>
-        <section className="official-visuals" aria-labelledby="key-visuals">
+        <section
+          className="official-visuals"
+          aria-labelledby="key-visuals"
+          data-reveal
+        >
           <div className="official-visuals-heading">
-            <span className="section-kicker">02 / official key visuals</span>
-            <h2 id="key-visuals">
+            <h2 id="key-visuals" className="section-title">
               <JapaneseLineBreak>
                 {locale === "ja"
                   ? "公式キービジュアル"
@@ -88,7 +89,7 @@ export default function Media() {
               </JapaneseLineBreak>
             </h2>
           </div>
-          <div className="official-visual-grid">
+          <div className="official-visual-grid" data-reveal>
             {keyVisuals.map((visual, index) => (
               <figure className="official-visual" key={visual.src}>
                 <Image
@@ -111,7 +112,7 @@ export default function Media() {
             ))}
           </div>
         </section>
-        <div className="media-links">
+        <div className="media-links" data-reveal>
           {mediaData.map((item) => (
             <a
               className="media-link"

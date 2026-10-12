@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "./Link";
 import LocaleSwitch from "./LocaleSwitch";
 import { useLocale } from "@/components/LocaleProvider";
@@ -18,7 +19,8 @@ export default function MobileNav() {
   const openerRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -105,10 +107,19 @@ export default function MobileNav() {
             ×
           </button>
           <div className="mobile-menu-title">{t("siteTitle")}</div>
-          <nav className="mobile-menu-nav" aria-label="Mobile navigation">
-            {links.map(([href, key], index) => (
-              <Link key={href} href={href} onClick={() => setOpen(false)}>
-                <span>0{index + 1}</span>
+          <nav
+            className="mobile-menu-nav"
+            aria-label={
+              locale === "ja" ? "モバイルナビゲーション" : "Mobile navigation"
+            }
+          >
+            {links.map(([href, key]) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                aria-current={pathname === href ? "page" : undefined}
+              >
                 <JapaneseLineBreak>{t(key)}</JapaneseLineBreak>
               </Link>
             ))}

@@ -13,8 +13,7 @@ export default function Story() {
     <>
       <section className="page-intro">
         <div className="page-intro-inner">
-          <div className="section-kicker">01 / {t("story")}</div>
-          <h1 className="section-title">
+          <h1 className="section-title" data-reveal>
             <span className="compound">
               <JapaneseLineBreak>{t("story")}</JapaneseLineBreak>
             </span>
@@ -22,7 +21,7 @@ export default function Story() {
         </div>
       </section>
       <div className="page-content">
-        <figure className="story-lead-visual">
+        <figure className="story-lead-visual" data-reveal>
           <Image
             src="/static/images/key-visual-hearing-room.png"
             alt={
@@ -35,26 +34,22 @@ export default function Story() {
             sizes="(max-width: 800px) 100vw, 1240px"
             priority
           />
-          <figcaption>
-            {locale === "ja" ? "キービジュアル 03" : "Key visual 03"}
-          </figcaption>
         </figure>
-        <div className="editorial-copy">
+        <div className="editorial-copy" data-reveal>
           <StorySynopsis />
         </div>
-        <div
-          id="characters"
-          className="section-kicker"
-          style={{ marginTop: 100 }}
-        >
-          02 /{" "}
+        <h2 id="characters" className="section-title" data-reveal>
           <span className="compound">
             <JapaneseLineBreak>{t("characters")}</JapaneseLineBreak>
           </span>
-        </div>
-        <div className="story-character-list">
+        </h2>
+        <div className="story-character-list" data-reveal>
           {characterData.slice(0, 4).map((character) => (
-            <article className="story-character" key={character.title}>
+            <article
+              className="story-character"
+              key={character.title}
+              data-reveal
+            >
               <Image
                 src={character.imgSrc}
                 alt={pickLocalized(character.name, locale)}

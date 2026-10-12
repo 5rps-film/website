@@ -12,56 +12,82 @@ export default function Main() {
   const { locale, t } = useLocale();
   return (
     <>
-      <section className="hero" aria-labelledby="film-title">
-        <div className="hero-content">
-          <div className="hero-copy">
-            <div className="eyebrow">Animated feature · 長編アニメーション</div>
-            <h1 className="hero-title" id="film-title">
-              <span className="hero-title-main">
-                <span className="title-group">秒速</span>
-                <span className="title-group">5リクエスト</span>
+      <section className="film-opening" aria-labelledby="film-title">
+        <Image
+          className="opening-image"
+          src="/static/images/key-visual-meeting-room.png"
+          fill
+          priority
+          sizes="100vw"
+          alt=""
+        />
+        <div className="opening-content">
+          <h1
+            className={`opening-title opening-title-${locale}`}
+            id="film-title"
+            key={locale}
+          >
+            {(locale === "ja"
+              ? ["秒速", "5リクエスト"]
+              : ["5 Requests", "Per", "Second"]
+            ).map((line) => (
+              <span className="title-mask" key={line}>
+                <span>{line}</span>
               </span>
-              <small>5 Requests Per Second</small>
-            </h1>
-            <p className="hero-premise">
-              <JapaneseLineBreak>
-                {t("synopsisBody").split("\n\n")[0]}
-              </JapaneseLineBreak>
+            ))}
+          </h1>
+          <div className="opening-bottom">
+            <p
+              className="opening-translation"
+              lang={locale === "ja" ? "en" : "ja"}
+            >
+              {locale === "ja" ? "5 Requests Per Second" : "秒速5リクエスト"}
             </p>
-            <div className="hero-actions">
-              <a className="text-action" href="#trailer">
-                <span className="action-box">▶</span>
+            <div className="opening-actions">
+              <a className="film-action" href="#trailer">
                 {locale === "ja" ? "予告編を見る" : "Watch trailer"}
+                <span aria-hidden="true">↘</span>
               </a>
-              <Link className="text-action" href="/story">
-                <span className="action-box">↘</span>
+              <Link className="film-action" href="/story">
                 {t("story")}
+                <span aria-hidden="true">↗</span>
               </Link>
             </div>
           </div>
         </div>
-        <div className="hero-rail" aria-hidden="true">
-          <div className="request-rail">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
+      </section>
+
+      <section
+        className="section film-trailer"
+        id="trailer"
+        aria-labelledby="trailer-heading"
+      >
+        <div className="section-inner">
+          <div className="section-heading" data-reveal>
+            <h2 className="section-title" id="trailer-heading">
+              {locale === "ja" ? "予告編" : "Trailer"}
+            </h2>
+            <Link className="film-action" href="/media">
+              {t("media")}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="trailer-stage" data-reveal>
+            <TrailerLink />
           </div>
         </div>
       </section>
-      <section className="section statement">
+
+      <section
+        className="section film-story"
+        aria-labelledby="synopsis-heading"
+      >
         <div className="section-inner">
-          <div className="section-kicker">01 / request received</div>
-          <div className="statement-copy">
-            <h2 className="section-title">
-              <JapaneseLineBreak>
-                {locale === "ja"
-                  ? "言葉は、誰のものか。"
-                  : "Who gets to own a sentence"}
-              </JapaneseLineBreak>
+          <div className="story-composition">
+            <h2 className="section-title" id="synopsis-heading" data-reveal>
+              <JapaneseLineBreak>{t("synopsis")}</JapaneseLineBreak>
             </h2>
-            <div className="statement-synopsis">
+            <div className="story-copy" data-reveal>
               {t("synopsisBody")
                 .split("\n\n")
                 .map((paragraph) => (
@@ -69,34 +95,18 @@ export default function Main() {
                     <JapaneseLineBreak>{paragraph}</JapaneseLineBreak>
                   </p>
                 ))}
+              <Link className="film-action" href="/story">
+                {t("learnMore")}
+                <span aria-hidden="true">↗</span>
+              </Link>
             </div>
-            <Link className="text-action" href="/story">
-              <span className="action-box">↗</span>
-              {t("learnMore")}
-            </Link>
           </div>
-        </div>
-      </section>
-      <section className="section split-section">
-        <div className="section-inner split-grid">
-          <div>
-            <div className="section-kicker">02 / the story</div>
-            <h2 className="section-title">
-              <JapaneseLineBreak>{t("synopsis")}</JapaneseLineBreak>
-            </h2>
-            <p>
-              <JapaneseLineBreak>{t("synopsisBody")}</JapaneseLineBreak>
-            </p>
-            <Link className="link-row" href="/story">
-              {t("story")} <span>↗</span>
-            </Link>
-          </div>
-          <figure className="art-frame">
+          <figure className="story-wide-image" data-reveal>
             <Image
               src="/static/images/key-visual-office-pull.png"
               width={1680}
               height={945}
-              sizes="(max-width: 800px) 100vw, 55vw"
+              sizes="(max-width: 800px) 100vw, 90vw"
               alt={
                 locale === "ja"
                   ? "スピーチ後のオフィスでエリザベスに連れ出されるカケル"
@@ -106,64 +116,55 @@ export default function Main() {
           </figure>
         </div>
       </section>
-      <section className="section characters-section" id="characters">
+
+      <section
+        className="section film-characters"
+        id="characters"
+        aria-labelledby="characters-heading"
+      >
         <div className="section-inner">
-          <div className="section-kicker">03 / the ensemble</div>
-          <h2 className="section-title">
-            <span className="compound">{t("characters")}</span>
-          </h2>
-          <div className="character-grid">
-            {characterData.slice(0, 4).map((character, index) => (
+          <div className="section-heading" data-reveal>
+            <h2 className="section-title" id="characters-heading">
+              <JapaneseLineBreak>{t("characters")}</JapaneseLineBreak>
+            </h2>
+            <Link className="film-action" href="/story#characters">
+              {t("story")}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="ensemble-grid">
+            {characterData.slice(0, 4).map((character) => (
               <Link
-                className="character-panel"
+                className="ensemble-card"
                 href="/story#characters"
                 key={character.title}
+                data-reveal
               >
-                <span className="character-index">0{index + 1}</span>
-                <Image
-                  src={character.imgSrc}
-                  alt={character.name[locale]}
-                  width={1200}
-                  height={1310}
-                  sizes="(max-width: 800px) 50vw, 25vw"
-                  style={{ objectPosition: character.focal }}
-                />
-                <div className="character-panel-content">
+                <div className="ensemble-image">
+                  <Image
+                    src={character.imgSrc}
+                    alt={character.name[locale]}
+                    width={1200}
+                    height={1310}
+                    sizes="(max-width: 600px) 90vw, 44vw"
+                    style={{ objectPosition: character.focal }}
+                  />
+                  <span className="ensemble-arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                </div>
+                <div className="ensemble-caption">
                   <h3>
                     <CharacterName character={character} locale={locale} />
                   </h3>
                   <p>
-                    <span className="compound">
-                      <JapaneseLineBreak>
-                        {character.position[locale]}
-                      </JapaneseLineBreak>
-                    </span>
+                    <JapaneseLineBreak>
+                      {character.position[locale]}
+                    </JapaneseLineBreak>
                   </p>
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-      <section className="section trailer-section" id="trailer">
-        <div className="section-inner trailer-wrap">
-          <TrailerLink />
-          <div>
-            <div className="section-kicker">04 / trailer 01</div>
-            <h2 className="section-title">
-              <JapaneseLineBreak>{t("media")}</JapaneseLineBreak>
-            </h2>
-            <p>
-              <JapaneseLineBreak>
-                {locale === "ja"
-                  ? "予告編と制作の記録。"
-                  : "The trailer, and the record of making it."}
-              </JapaneseLineBreak>
-            </p>
-            <Link className="text-action" href="/media">
-              <span className="action-box">↗</span>
-              {locale === "ja" ? "メディアページ" : "View media"}
-            </Link>
           </div>
         </div>
       </section>

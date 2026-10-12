@@ -2,15 +2,22 @@
 
 import Image from "next/image";
 import { useLocale } from "@/components/LocaleProvider";
-import YouTubeModal from "@/components/YouTubeModal";
 
 export default function TrailerLink() {
   const { locale } = useLocale();
   const label =
-    locale === "ja" ? "YouTubeで予告編を再生" : "Play the trailer on YouTube";
+    locale === "ja"
+      ? "YouTubeで予告編を見る（新しいタブ）"
+      : "Watch on YouTube (new tab)";
 
   return (
-    <YouTubeModal className="trailer-thumb" triggerKind="thumbnail">
+    <a
+      className="trailer-thumb"
+      href="https://www.youtube.com/watch?v=RHOlJCpDuPM"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+    >
       <Image
         src="/static/images/key-visual-meeting-room.png"
         alt=""
@@ -22,6 +29,6 @@ export default function TrailerLink() {
         ▶
       </span>
       <span className="trailer-new-tab">{label}</span>
-    </YouTubeModal>
+    </a>
   );
 }

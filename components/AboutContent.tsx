@@ -31,17 +31,16 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
     <>
       <section className="page-intro">
         <div className="page-intro-inner">
-          <div className="section-kicker">01 / production</div>
-          <h1 className="section-title">
+          <h1 className="section-title" data-reveal>
             <JapaneseLineBreak>{heading}</JapaneseLineBreak>
           </h1>
         </div>
       </section>
       <div className="page-content">
-        <p className="editorial-copy">
+        <p className="editorial-copy" data-reveal>
           <JapaneseLineBreak>{introduction}</JapaneseLineBreak>
         </p>
-        <div className="credits-grid">
+        <div className="credits-grid" data-reveal>
           {authors.map((author) => {
             const content = localizeAuthor(coreContent(author), locale);
 

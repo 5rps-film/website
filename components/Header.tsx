@@ -15,7 +15,7 @@ const links = [
 ] as const;
 
 export default function Header() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const pathname = usePathname();
   const overlaysHero = pathname === "/";
   const [solid, setSolid] = useState(false);
@@ -36,13 +36,27 @@ export default function Header() {
     <header
       className={`site-header ${overlaysHero ? "is-overlay" : "is-page-header"} ${solid ? "is-solid" : ""}`}
     >
+      <a className="skip-link" href="#main-content">
+        {locale === "ja"
+          ? "メインコンテンツへスキップ"
+          : "Skip to main content"}
+      </a>
       <div className="header-inner">
         <Link className="wordmark" href="/" aria-label={t("siteTitle")}>
-          <span className="mark-title">{t("siteTitle")}</span>
+          <span className="mark-title">5RPS</span>
         </Link>
-        <nav className="header-nav" aria-label="Primary navigation">
+        <nav
+          className="header-nav"
+          aria-label={
+            locale === "ja" ? "メインナビゲーション" : "Primary navigation"
+          }
+        >
           {links.map(([href, key]) => (
-            <Link key={href} href={href}>
+            <Link
+              key={href}
+              href={href}
+              aria-current={pathname === href ? "page" : undefined}
+            >
               <JapaneseLineBreak>{t(key)}</JapaneseLineBreak>
             </Link>
           ))}

@@ -3,6 +3,7 @@ import "css/tailwind.css";
 import { Space_Grotesk } from "next/font/google";
 import { Analytics, AnalyticsConfig } from "pliny/analytics";
 import Header from "@/components/Header";
+import MotionDirector from "@/components/MotionDirector";
 import SectionContainer from "@/components/SectionContainer";
 import Footer from "@/components/Footer";
 import siteMetadata from "@/data/siteMetadata";
@@ -151,7 +152,10 @@ export default function RootLayout({
             <SectionContainer>
               <div className="site-shell font-sans">
                 <Header />
-                <main>{children}</main>
+                <MotionDirector />
+                <main id="main-content" tabIndex={-1}>
+                  {children}
+                </main>
                 <Footer />
               </div>
             </SectionContainer>
