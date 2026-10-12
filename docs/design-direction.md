@@ -11,32 +11,28 @@ Reference: https://palominoprod.com/en (12 October 2026).
    checks, push to canonical origin/main, confirm Vercel deployment and clean
    task-created outputs.
 
-## Design
+## Current composition and motion
 
-Use the reference's full-screen film imagery, staggered oversized typography,
-quiet navigation and generous editorial spacing. Adapt those principles to the
-existing 5RPS identity and authored content; do not copy its assets or copy.
+The current full-page architecture is specified in
+[full-journey-design.md](full-journey-design.md). It supersedes the earlier
+regular two-column section treatment: cinematic identity, compact navigation,
+large trailer stage, variable-scale story stills, dense character editorial
+rows, verified contributor grid, actionable follow invitation and bright footer.
 
-The opening uses existing cleared 5RPS imagery behind an English title arranged
-as three alternating lines, or Japanese title in the authored 秒速 / 5リクエスト
-groups, both left-aligned. Japanese copy uses a consistent left edge.
-The second language remains a readable translation. Trailer follows
-immediately, then a single synopsis section and a spacious character gallery.
-Keep warm paper, charcoal, restrained red and the existing Space Grotesk / Mincho
-font system. Replace boxy action icons with plain directional arrows and rules.
+Use the shared responsive gutter/grid and warm paper, charcoal, restrained red
+and established Space Grotesk / Mincho system. All Japanese copy remains
+left-aligned, including both authored title groups 秒速 / 5リクエスト.
+
+Motion does compositional work through the title masks, a bounded trailer
+scale, small still-image movement, coordinated character-row reveals,
+contributor stagger and closing type. All content has a static readable state;
+reduced motion removes movement. No scroll hijacking, forced loader,
+continuous ticker, fabricated footage or new dependencies.
 
 No decorative section numbers, character indices, slash-date labels or tiny
-uppercase category subtitles. Keep meaningful film copy, credits and copyright.
-Use clear hierarchy through scale and space, with readable navigation/body type.
-
-## Motion
-
-Use short masked title entrances, one-time section reveals and restrained image
-hover movement. One easing curve, no scroll hijacking, no custom cursor, no
-forced loading animation, no continuous text ticker. IntersectionObserver only
-animates visible content; content remains visible without JavaScript. Reduced
-motion displays the final state with all movement disabled. The film still is
-an honest still, not fabricated video footage.
+uppercase category subtitles. Keep meaningful film copy, exact credits and
+copyright. Do not create client lists, metrics, testimonials or film facts to
+fill a reference layout.
 
 ## Boundaries
 

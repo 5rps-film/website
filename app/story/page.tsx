@@ -47,16 +47,17 @@ export default function Story() {
           {characterData.slice(0, 4).map((character) => (
             <article
               className="story-character"
+              id={character.title.toLowerCase().replaceAll(" ", "-")}
               key={character.title}
               data-reveal
             >
               <Image
                 src={character.imgSrc}
                 alt={pickLocalized(character.name, locale)}
-                width={1200}
-                height={1310}
+                width={1680}
+                height={945}
                 sizes="(max-width: 600px) 100vw, 30vw"
-                style={{ objectPosition: character.focal }}
+                style={{ objectPosition: "center 30%" }}
               />
               <div>
                 <h2>
