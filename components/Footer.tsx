@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/components/LocaleProvider";
 import { Discord, Instagram } from "@/components/social-icons/icons";
+import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function Footer() {
@@ -10,6 +11,30 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
+        <div className="footer-top">
+          <p>
+            {locale === "ja"
+              ? "制作中の長編アニメーション"
+              : "An animated feature in progress"}
+          </p>
+          <nav
+            className="footer-nav"
+            aria-label={
+              locale === "ja" ? "フッターナビゲーション" : "Footer navigation"
+            }
+          >
+            {[
+              ["/story", "story"],
+              ["/media", "media"],
+              ["/about", "about"],
+            ].map(([href, key]) => (
+              <Link key={href} href={href}>
+                {t(key as "story" | "media" | "about")}
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
         <p className="footer-title" data-reveal>
           5RPS<span style={{ color: "var(--request-red)" }}>.</span>
         </p>

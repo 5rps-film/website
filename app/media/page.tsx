@@ -58,10 +58,12 @@ export default function Media() {
         </div>
       </section>
       <div className="page-content">
-        <div className="media-feature" data-reveal>
-          <TrailerLink />
-          <div>
-            <h2 className="section-title" data-reveal>
+        <div className="media-feature">
+          <div data-reveal="image">
+            <TrailerLink />
+          </div>
+          <div data-reveal>
+            <h2 className="section-title">
               <JapaneseLineBreak>
                 {locale === "ja" ? "予告編を公開中。" : "The trailer is live."}
               </JapaneseLineBreak>
@@ -75,11 +77,7 @@ export default function Media() {
             </p>
           </div>
         </div>
-        <section
-          className="official-visuals"
-          aria-labelledby="key-visuals"
-          data-reveal
-        >
+        <section className="official-visuals" aria-labelledby="key-visuals">
           <div className="official-visuals-heading">
             <h2 id="key-visuals" className="section-title">
               <JapaneseLineBreak>
@@ -89,9 +87,13 @@ export default function Media() {
               </JapaneseLineBreak>
             </h2>
           </div>
-          <div className="official-visual-grid" data-reveal>
+          <div className="official-visual-grid">
             {keyVisuals.map((visual, index) => (
-              <figure className="official-visual" key={visual.src}>
+              <figure
+                className="official-visual"
+                key={visual.src}
+                data-reveal="image"
+              >
                 <Image
                   src={visual.src}
                   alt={pickLocalized(visual.alt, locale)}
@@ -119,7 +121,8 @@ export default function Media() {
               key={item.href}
               href={item.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label={`${pickLocalized(item.title, locale)} ${locale === "ja" ? "（新しいタブ）" : "(new tab)"}`}
             >
               <JapaneseLineBreak as="span">
                 {pickLocalized(item.title, locale)}

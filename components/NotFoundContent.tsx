@@ -7,24 +7,16 @@ export default function NotFoundContent() {
   const { t } = useLocale();
 
   return (
-    <div className="light-page-surface flex flex-col items-start justify-start md:flex-row md:items-center md:justify-center md:space-x-6">
-      <div className="space-x-2 pb-8 pt-6 md:space-y-5">
-        <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
-          404
-        </h1>
-      </div>
-      <div className="max-w-md">
-        <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-          {t("notFoundTitle")}
-        </p>
-        <p className="mb-8">{t("notFoundBody")}</p>
-        <Link
-          href="/"
-          className="focus:shadow-outline-blue inline rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-blue-700 focus:outline-none dark:hover:bg-blue-500"
-        >
+    <section className="page-content not-found">
+      <h1 className="section-title">404</h1>
+      <div className="not-found-copy">
+        <h2>{t("notFoundTitle")}</h2>
+        <p>{t("notFoundBody")}</p>
+        <Link href="/" className="film-action">
           {t("backToHome")}
+          <span aria-hidden="true">↗</span>
         </Link>
       </div>
-    </div>
+    </section>
   );
 }

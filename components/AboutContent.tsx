@@ -40,12 +40,12 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
         <p className="editorial-copy" data-reveal>
           <JapaneseLineBreak>{introduction}</JapaneseLineBreak>
         </p>
-        <div className="credits-grid" data-reveal>
+        <div className="credits-grid">
           {authors.map((author) => {
             const content = localizeAuthor(coreContent(author), locale);
 
             return (
-              <article className="credit-block" key={author.slug}>
+              <article className="credit-block" key={author.slug} data-reveal>
                 <div className="credit-heading">
                   {content.avatar && (
                     <Image

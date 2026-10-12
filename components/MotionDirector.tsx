@@ -19,9 +19,15 @@ export default function MotionDirector() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           observer.unobserve(entry.target);
+          const isImage = entry.target.getAttribute("data-reveal") === "image";
           const animation = entry.target.animate(
             [
-              { opacity: 0, transform: "translateY(28px)" },
+              {
+                opacity: 0,
+                transform: isImage
+                  ? "translateY(20px) scale(0.985)"
+                  : "translateY(20px)",
+              },
               { opacity: 1, transform: "translateY(0)" },
             ],
             { duration: 700, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
@@ -33,9 +39,10 @@ export default function MotionDirector() {
       { threshold: 0.08 },
     );
 
-    document
-      .querySelectorAll("[data-reveal]")
-      .forEach((element) => observer.observe(element));
+    document.querySelectorAll("[data-reveal]").forEach((element) => {
+      if (!element.parentElement?.closest("[data-reveal]"))
+        observer.observe(element);
+    });
     const stop = () => {
       if (!preference.matches) return;
       observer.disconnect();

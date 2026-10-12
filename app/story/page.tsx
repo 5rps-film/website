@@ -43,7 +43,7 @@ export default function Story() {
             <JapaneseLineBreak>{t("characters")}</JapaneseLineBreak>
           </span>
         </h2>
-        <div className="story-character-list" data-reveal>
+        <div className="story-character-list">
           {characterData.slice(0, 4).map((character) => (
             <article
               className="story-character"
@@ -53,8 +53,10 @@ export default function Story() {
               <Image
                 src={character.imgSrc}
                 alt={pickLocalized(character.name, locale)}
-                width={982}
-                height={500}
+                width={1200}
+                height={1310}
+                sizes="(max-width: 600px) 100vw, 30vw"
+                style={{ objectPosition: character.focal }}
               />
               <div>
                 <h2>
