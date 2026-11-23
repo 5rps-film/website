@@ -31,49 +31,40 @@ export default function Main({
   return (
     <div className="film-journey">
       <section
-        className="film-opening"
+        className="poster-opening"
         aria-labelledby="film-title"
         data-header-tone="dark"
-        data-scroll-scene="hero"
       >
-        <div className="opening-image-frame film-frame">
-          <Image
-            className="opening-image"
-            src="/static/images/key-visual-meeting-room.png"
-            width={1672}
-            height={941}
-            priority
-            sizes="(max-width: 800px) 100vw, 55vw"
-            alt=""
+        <h1 className="sr-only" id="film-title">
+          {t("siteTitle")}
+        </h1>
+        <picture className="opening-poster">
+          <source
+            media="(max-aspect-ratio: 1/1)"
+            srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w"
+            sizes="(max-aspect-ratio: 2/3) 100vw, 67vh"
+            width={1024}
+            height={1536}
           />
-        </div>
-        <div className="opening-content">
-          <p
-            className="opening-translation"
-            lang={locale === "ja" ? "en" : "ja"}
-          >
-            {locale === "ja" ? "5 Requests Per Second" : "秒速5リクエスト"}
-          </p>
-          <h1
-            className={`opening-title opening-title-${locale}`}
-            id="film-title"
-            key={locale}
-          >
-            {(locale === "ja"
-              ? ["秒速", "5リクエスト"]
-              : ["5 Requests", "Per", "Second"]
-            ).map((line) => (
-              <span className="title-mask" key={line}>
-                <span>{line}</span>
-              </span>
-            ))}
-          </h1>
-          <div className="opening-bottom">
-            <p className="opening-status">{status}</p>
-            <a className="film-action" href="#trailer">
-              <span>{locale === "ja" ? "予告編を見る" : "Watch trailer"}</span>
-            </a>
-          </div>
+          <img
+            src="/static/images/startup-poster-landscape-1664.webp"
+            srcSet="/static/images/startup-poster-landscape-768.webp 768w, /static/images/startup-poster-landscape-1200.webp 1200w, /static/images/startup-poster-landscape-1664.webp 1664w"
+            sizes="(min-aspect-ratio: 16/9) 178vh, 100vw"
+            width={1664}
+            height={936}
+            fetchPriority="high"
+            alt={
+              locale === "ja"
+                ? "会議室を出てオフィスを歩く4人。『秒速5リクエスト』監督・脚本：秋山 翔、アニメーション制作：丸の内アニメーションラボ。"
+                : "The four engineers leave their meeting room. 5 Requests Per Second. Directed and written by Sho Akiyama. Animation by Marunouchi Animation Labs."
+            }
+          />
+        </picture>
+        <div className="poster-caption">
+          <p>{status}</p>
+          <a href="#trailer">
+            {locale === "ja" ? "予告編を見る" : "Watch trailer"}
+          </a>
         </div>
       </section>
 

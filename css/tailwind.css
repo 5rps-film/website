@@ -2228,8 +2228,11 @@ body {
   border-bottom: 1px solid #73675b;
   backdrop-filter: none;
 }
+:root {
+  --film-header-height: 82px;
+}
 .site-header .header-inner {
-  min-height: 82px;
+  min-height: var(--film-header-height);
   padding-block: 12px;
 }
 .site-header .wordmark,
@@ -2423,8 +2426,10 @@ body {
   font-size: 0.7em;
 }
 @media (max-width: 800px) {
+  :root {
+    --film-header-height: 68px;
+  }
   .site-header .header-inner {
-    min-height: 68px;
     padding-block: 8px;
   }
   .menu-button {
