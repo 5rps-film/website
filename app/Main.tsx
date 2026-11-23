@@ -40,6 +40,12 @@ export default function Main({
         </h1>
         <picture className="opening-poster">
           <source
+            media="(orientation: landscape) and (max-height: 500px)"
+            srcSet="/static/images/startup-poster-landscape-compact.webp"
+            width={1200}
+            height={675}
+          />
+          <source
             media="(max-aspect-ratio: 1/1)"
             srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w"
             sizes="(max-aspect-ratio: 2/3) 100vw, 67vh"

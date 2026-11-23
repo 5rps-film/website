@@ -1,6 +1,11 @@
 /* Fit the complete one-sheet between the sticky header and its caption. */
 .poster-opening {
   --poster-width-per-height: 1.77777778;
+  --poster-screen: 100vh;
+  --poster-max-width: calc(
+    (var(--poster-screen) - var(--film-header-height) - 49px) *
+      var(--poster-width-per-height)
+  );
   display: grid;
   justify-items: center;
   color: #eee6db;
@@ -8,12 +13,7 @@
 .opening-poster {
   display: block;
   width: 100%;
-  max-width: calc(
-    (100vh - var(--film-header-height) - 49px) * var(--poster-width-per-height)
-  );
-  max-width: calc(
-    (100svh - var(--film-header-height) - 49px) * var(--poster-width-per-height)
-  );
+  max-width: var(--poster-max-width);
 }
 .opening-poster img {
   display: block;
@@ -42,6 +42,32 @@
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 0.24em;
+}
+@supports (height: 100svh) {
+  .poster-opening {
+    --poster-screen: 100svh;
+  }
+}
+
+/* Align the controls with the lettering on the inset landscape print. */
+@media (orientation: landscape) {
+  .poster-opening {
+    grid-template-columns: min(100%, var(--poster-max-width));
+    justify-content: center;
+  }
+  .poster-caption {
+    padding-inline: 3.85%;
+    font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  :root:has(.poster-opening) {
+    --film-header-height: 48px;
+  }
+  .site-shell:has(.poster-opening) .site-header .header-inner {
+    padding-block: 2px;
+  }
 }
 @media (max-aspect-ratio: 1/1) {
   .poster-opening {
