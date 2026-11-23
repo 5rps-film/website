@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLocale } from "@/components/LocaleProvider";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
@@ -7,6 +8,7 @@ import mediaData from "@/data/mediaData";
 
 export default function Footer() {
   const { locale, t } = useLocale();
+  const pathname = usePathname();
   const newTab =
     locale === "ja" ? "（新しいタブで開く）" : "(opens in a new tab)";
   return (
@@ -33,9 +35,12 @@ export default function Footer() {
               ["/media", "media"],
               ["/about", "about"],
             ].map(([href, key]) => (
-              <Link key={href} href={href}>
+              <Link
+                key={href}
+                href={href}
+                aria-current={pathname === href ? "page" : undefined}
+              >
                 {t(key as "home" | "story" | "media" | "about")}
-                <span aria-hidden="true">↗</span>
               </Link>
             ))}
           </nav>
@@ -52,7 +57,6 @@ export default function Footer() {
                 aria-label={`${item.title[locale]} ${newTab}`}
               >
                 {item.title[locale]}
-                <span aria-hidden="true">↗</span>
               </a>
             ))}
             <a
@@ -61,13 +65,12 @@ export default function Footer() {
               rel="noopener noreferrer"
               aria-label={`Discord ${newTab}`}
             >
-              Discord<span aria-hidden="true">↗</span>
+              Discord
             </a>
           </div>
           <div className="footer-contact">
             <a href={`mailto:${siteMetadata.email}`}>
               {locale === "ja" ? "お問い合わせ" : "Contact"}
-              <span aria-hidden="true">↗</span>
             </a>
             <a
               href={`https://maru-ani.jp/${locale}/journal?filter=5rps`}
@@ -76,7 +79,6 @@ export default function Footer() {
               aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} ${newTab}`}
             >
               {locale === "ja" ? "制作の記録" : "Production journal"}
-              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>

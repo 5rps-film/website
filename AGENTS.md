@@ -41,6 +41,8 @@ production repository instructions when this project is reached through the
 
 ## Design system
 
+For each affected design or component, align the header, content and captions to explicit desktop and phone gutters. Give each gap one owner. Centre the visible English or Japanese label and any adjacent icon inside its hit area, with balanced logical padding and an equally offset focus outline. Inspect the actual fonts at reading size, including descenders and wrapped labels, and correct recurring offsets in the component.
+
 Use the existing CSS custom properties instead of introducing isolated colors:
 
 - `--paper` and `--paper-hi`: warm light surfaces and text on dark surfaces.

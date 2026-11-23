@@ -18,17 +18,22 @@ export default function TrailerLink() {
       rel="noopener noreferrer"
       aria-label={label}
     >
-      <Image
-        src="/static/images/key-visual-meeting-room.png"
-        alt=""
-        width={1680}
-        height={945}
-        sizes="(max-width: 800px) 100vw, 70vw"
-      />
-      <span className="play-mark" aria-hidden="true">
-        ▶
+      <span className="trailer-picture film-frame">
+        <Image
+          src="/static/images/key-visual-meeting-room.png"
+          alt=""
+          width={1672}
+          height={941}
+          sizes="(max-width: 800px) 100vw, 70vw"
+        />
+        <span className="play-mark" aria-hidden="true">
+          ▶
+        </span>
       </span>
-      <span className="trailer-new-tab">{label}</span>
+      <span className="trailer-new-tab">
+        {label}
+        <span aria-hidden="true"> ↗</span>
+      </span>
     </a>
   );
 }

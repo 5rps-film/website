@@ -8,6 +8,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { components } from "@/components/MDXComponents";
 import { localizeAuthor } from "@/data/localizedAuthors";
 import JapaneseLineBreak from "@/components/JapaneseLineBreak";
+import "./interior-pages.css";
 
 export default function AboutContent({ authors }: { authors: Authors[] }) {
   const { locale } = useLocale();
@@ -28,7 +29,7 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
     ));
 
   return (
-    <>
+    <div className="interior-page about-page">
       <section className="page-intro">
         <div className="page-intro-inner">
           <h1 className="section-title" data-reveal>
@@ -46,7 +47,7 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
 
             return (
               <article className="credit-block" key={author.slug} data-reveal>
-                <div className="credit-heading">
+                <div className="credit-image">
                   {content.avatar && (
                     <Image
                       className="credit-avatar"
@@ -57,6 +58,8 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
                       sizes="(max-width: 480px) 72px, 96px"
                     />
                   )}
+                </div>
+                <div className="credit-heading">
                   <div>
                     <h2>{content.name}</h2>
                     {content.occupation && (
@@ -64,7 +67,7 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
                     )}
                   </div>
                 </div>
-                <div className="prose mt-5 max-w-none">
+                <div className="credit-body prose max-w-none">
                   <MDXLayoutRenderer
                     code={author.body.code}
                     components={components}
@@ -75,6 +78,6 @@ export default function AboutContent({ authors }: { authors: Authors[] }) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "./Link";
 import MobileNav from "./MobileNav";
@@ -17,25 +16,9 @@ const links = [
 export default function Header() {
   const { locale, t } = useLocale();
   const pathname = usePathname();
-  const overlaysHero = pathname === "/";
-  const [solid, setSolid] = useState(false);
-
-  useEffect(() => {
-    if (!overlaysHero) {
-      setSolid(false);
-      return;
-    }
-
-    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.72);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [overlaysHero]);
 
   return (
-    <header
-      className={`site-header ${overlaysHero ? "is-overlay" : "is-page-header"} ${solid ? "is-solid" : ""}`}
-    >
+    <header className="site-header">
       <a className="skip-link" href="#main-content">
         {locale === "ja"
           ? "メインコンテンツへスキップ"

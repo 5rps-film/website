@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import "./home.css";
 import type { Authors } from "contentlayer/generated";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import Link from "@/components/Link";
@@ -35,13 +36,14 @@ export default function Main({
         data-header-tone="dark"
         data-scroll-scene="hero"
       >
-        <div className="opening-image-frame">
+        <div className="opening-image-frame film-frame">
           <Image
             className="opening-image"
             src="/static/images/key-visual-meeting-room.png"
-            fill
+            width={1672}
+            height={941}
             priority
-            sizes="100vw"
+            sizes="(max-width: 800px) 100vw, 55vw"
             alt=""
           />
         </div>
@@ -69,8 +71,7 @@ export default function Main({
           <div className="opening-bottom">
             <p className="opening-status">{status}</p>
             <a className="film-action" href="#trailer">
-              {locale === "ja" ? "予告編を見る" : "Watch trailer"}
-              <span aria-hidden="true">↘</span>
+              <span>{locale === "ja" ? "予告編を見る" : "Watch trailer"}</span>
             </a>
           </div>
         </div>
@@ -84,22 +85,10 @@ export default function Main({
         data-header-tone="dark"
       >
         <div className="section-inner journey-rail-inner">
-          <a href="#trailer">
-            {locale === "ja" ? "予告編" : "Trailer"}
-            <span aria-hidden="true">↘</span>
-          </a>
-          <a href="#story-world">
-            {t("story")}
-            <span aria-hidden="true">↘</span>
-          </a>
-          <a href="#characters">
-            {t("characters")}
-            <span aria-hidden="true">↘</span>
-          </a>
-          <a href="#production">
-            {t("about")}
-            <span aria-hidden="true">↘</span>
-          </a>
+          <a href="#trailer">{locale === "ja" ? "予告編" : "Trailer"}</a>
+          <a href="#story-world">{t("story")}</a>
+          <a href="#characters">{t("characters")}</a>
+          <a href="#production">{t("about")}</a>
         </div>
       </nav>
 
@@ -124,7 +113,6 @@ export default function Main({
             </h2>
             <Link className="film-action" href="/media">
               {t("media")}
-              <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="cinema-stage">
@@ -154,6 +142,7 @@ export default function Main({
               data-reveal="image"
             >
               <Link
+                className="film-frame"
                 href="/media"
                 aria-label={
                   locale === "ja"
@@ -177,7 +166,6 @@ export default function Main({
                 {locale === "ja"
                   ? "オフィスプレゼンテーション"
                   : "Office presentation"}
-                <span aria-hidden="true">↗</span>
               </figcaption>
             </figure>
             <figure
@@ -185,6 +173,7 @@ export default function Main({
               data-reveal="image"
             >
               <Link
+                className="film-frame"
                 href="/media"
                 aria-label={
                   locale === "ja"
@@ -206,7 +195,6 @@ export default function Main({
               </Link>
               <figcaption>
                 {locale === "ja" ? "ヒアリングルーム" : "Hearing room"}
-                <span aria-hidden="true">↗</span>
               </figcaption>
             </figure>
           </div>
@@ -216,7 +204,6 @@ export default function Main({
             </p>
             <Link className="film-action" href="/story">
               {t("learnMore")}
-              <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </div>
@@ -277,7 +264,6 @@ export default function Main({
                     href={`/story#${character.title.toLowerCase().replaceAll(" ", "-")}`}
                   >
                     {t("story")}
-                    <span aria-hidden="true">↗</span>
                   </Link>
                 </div>
               </article>
@@ -314,7 +300,6 @@ export default function Main({
               </p>
               <Link className="film-action" href="/about">
                 {t("about")}
-                <span aria-hidden="true">↗</span>
               </Link>
             </div>
           </div>
@@ -354,7 +339,6 @@ export default function Main({
                 </JapaneseLineBreak>
               </h3>
               <p>Marunouchi Animation Labs</p>
-              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
@@ -397,7 +381,7 @@ export default function Main({
               rel="noopener noreferrer"
               aria-label={`Discord ${newTab}`}
             >
-              Discord<span aria-hidden="true">↗</span>
+              Discord
             </a>
             <a
               className="film-action"
@@ -407,7 +391,6 @@ export default function Main({
               aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} ${newTab}`}
             >
               {locale === "ja" ? "制作の記録" : "Production journal"}
-              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>

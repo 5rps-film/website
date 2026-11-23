@@ -2188,3 +2188,324 @@ a {
     align-self: start;
   }
 }
+
+/* Office material palette and shared film-site components. */
+:root {
+  --paper: #e2dcd2;
+  --paper-hi: #ede8df;
+  --ink: #322e29;
+  --graphite: #5c544a;
+  --rule: #b9b0a5;
+  --wine: #655140;
+  --request-red: #655140;
+  --journey-rule: #73675b;
+  --journey-muted: #c7baaa;
+  --film-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  --gutter: clamp(20px, 4vw, 64px);
+}
+html,
+body {
+  background: var(--paper);
+}
+body {
+  background-image: url("/static/images/film-surface.png");
+  background-size: 192px 192px;
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.site-header,
+.site-header.is-overlay,
+.site-header.is-solid,
+.site-header.is-page-header {
+  position: sticky;
+  top: 0;
+  inset-inline: auto;
+  z-index: 30;
+  background: #352f29 url("/static/images/film-surface.png") repeat;
+  color: #eee6db;
+  border-bottom: 1px solid #73675b;
+  backdrop-filter: none;
+}
+.site-header .header-inner {
+  min-height: 82px;
+  padding-block: 12px;
+}
+.site-header .wordmark,
+.site-header .wordmark .mark-title {
+  color: #eee6db;
+}
+.site-header .wordmark,
+.header-nav a,
+.locale-option {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.header-nav a {
+  padding: 0;
+}
+.header-nav a::after {
+  background: currentColor;
+  height: 1px;
+  bottom: 6px;
+}
+.locale-switch {
+  overflow: visible;
+}
+.locale-option,
+.locale-option:hover,
+.locale-option:focus-visible,
+.locale-option.is-selected,
+.locale-option[aria-pressed="true"] {
+  color: inherit;
+}
+.locale-option {
+  min-width: 44px;
+  padding: 0 8px;
+}
+.mobile-menu-panel {
+  background: #352f29 url("/static/images/film-surface.png") repeat;
+  color: #eee6db;
+}
+.mobile-menu-close {
+  background: #352f29;
+  color: #eee6db;
+}
+.mobile-menu-title,
+.mobile-menu-nav,
+.mobile-menu-nav span,
+.mobile-menu-nav a[aria-current="page"],
+.mobile-locale {
+  color: inherit;
+}
+.mobile-menu-nav a,
+.mobile-locale {
+  border-color: #73675b;
+}
+.mobile-menu-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+.film-journey {
+  background: #352f29 url("/static/images/film-surface.png") repeat;
+  color: #eee6db;
+}
+.film-journey .film-opening {
+  background: radial-gradient(ellipse at 73% 27%, #44392d 0%, transparent 65%);
+}
+.journey-production,
+.footer,
+.interior-page,
+.page-intro,
+.page-content,
+.not-found {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.journey-production,
+.footer,
+.interior-page {
+  background-image: url("/static/images/film-surface.png");
+  background-size: 192px 192px;
+}
+.footer-nav a,
+.footer-socials a,
+.footer-contact a {
+  justify-content: flex-start;
+}
+.footer a:hover,
+.header-nav a:hover,
+.journey-rail a:hover,
+.mobile-menu-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* A real border gives the four rails diagonal mitres. The inset shadow is the print contact line. */
+.film-frame {
+  position: relative;
+  display: block;
+  padding: 4px;
+  border: 2px solid;
+  border-color: #a59c8d #8a8173 #8a8173 #a59c8d;
+  background: #d6cec1;
+  box-shadow: 0 3px 2px rgb(0 0 0 / 14%);
+}
+.film-frame > img,
+.film-frame > picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 22%);
+}
+.film-journey .film-frame {
+  border-color: #4d443a #27231f #27231f #4d443a;
+  background: #39332d;
+  box-shadow:
+    0 2px 2px rgb(0 0 0 / 54%),
+    2px 6px 8px rgb(0 0 0 / 42%);
+}
+.film-frame:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+/* Frames stay stationary; text and image reveals remain owned by MotionDirector. */
+.motion-active .opening-image-frame,
+.motion-active .cinema-stage,
+.motion-active .world-image-primary > a,
+.motion-active .world-image-secondary > a {
+  transform: none;
+}
+.world-image a:hover img,
+.trailer-thumb:hover img {
+  transform: none;
+}
+.cinema-stage {
+  overflow: visible;
+}
+.trailer-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: auto;
+  overflow: visible;
+  background: transparent;
+}
+.trailer-picture {
+  position: relative;
+}
+.trailer-picture img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.trailer-thumb .play-mark {
+  left: 20px;
+  bottom: 20px;
+  width: 52px;
+  height: 52px;
+  transform: none;
+  border: 1px solid #d6bea3;
+  border-radius: 50%;
+  background: #352f29;
+  color: #d6bea3;
+  backdrop-filter: none;
+  font-size: 14px;
+  line-height: 1;
+}
+.trailer-thumb:hover .play-mark {
+  background: #403932;
+  border-color: #d6bea3;
+  color: #eee6db;
+}
+.trailer-thumb .trailer-new-tab {
+  position: static;
+  display: block;
+  max-width: none;
+  margin-top: 10px;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+}
+.trailer-new-tab > span {
+  font-size: 0.7em;
+}
+@media (max-width: 800px) {
+  .site-header .header-inner {
+    min-height: 68px;
+    padding-block: 8px;
+  }
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .film-frame {
+    padding: 2px;
+    border-width: 1px;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 14%);
+  }
+  .film-journey .film-frame {
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 52%),
+      1px 4px 6px rgb(0 0 0 / 34%);
+  }
+  .film-journey .opening-image-frame {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .film-journey .opening-image-frame > img {
+    box-shadow: none;
+  }
+  .film-journey .film-opening {
+    background: transparent;
+  }
+  .footer-title {
+    background: none;
+    color: var(--ink);
+  }
+}
+@media (forced-colors: active) {
+  .film-frame,
+  .site-header,
+  .film-journey,
+  .mobile-menu-panel {
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+
+.footer-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/static/fonts/geist-mono-medium.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+:lang(en) .film-journey .opening-title-en,
+:lang(en)
+  :is(
+    .header-nav,
+    .journey-rail,
+    .film-action,
+    .trailer-new-tab,
+    .media-link,
+    .footer-nav
+  ),
+.site-header .locale-switch {
+  font-family: var(--film-mono);
+  font-weight: 500;
+}
+.film-journey .opening-title-en {
+  letter-spacing: -0.052em;
+}
+.media-page,
+.media-page .page-content,
+.interior-page .page-content,
+.interior-page .page-intro {
+  background-image: url("/static/images/film-surface.png");
+  background-size: 192px 192px;
+}
+.site-header .locale-option[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}

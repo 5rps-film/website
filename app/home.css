@@ -1,0 +1,205 @@
+/* Home's composition consumes the shared film surfaces and picture mounts. */
+.film-journey .film-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(20px, 2.2vw, 32px);
+  min-height: 0;
+  padding: clamp(48px, 6vw, 86px) min(4vw, 64px);
+  overflow: visible;
+}
+.film-journey .film-opening::after {
+  content: none;
+}
+.film-journey .opening-image-frame {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+}
+.film-journey .opening-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.film-journey .opening-content {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.film-journey .opening-translation {
+  margin: 0 0 24px;
+  padding: 0;
+}
+.film-journey .opening-title {
+  font-size: clamp(3rem, 5.4vw, 5.5rem);
+  line-height: 1;
+}
+.film-journey .opening-title-ja {
+  font-size: clamp(2.5rem, 5.2vw, 5.2rem);
+  line-height: 1.15;
+}
+.film-journey .opening-title-en .title-mask:nth-child(2),
+.film-journey .opening-title-en .title-mask:nth-child(3) {
+  padding-left: 0;
+  text-align: left;
+}
+.film-journey .opening-bottom {
+  display: block;
+  border: 0;
+  margin-top: 28px;
+  padding: 0;
+}
+.film-journey .opening-status {
+  margin-bottom: 12px;
+}
+.film-journey .film-action {
+  justify-content: flex-start;
+  gap: 5px;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.film-journey .film-action span {
+  font-size: inherit;
+}
+.film-journey .journey-rail a {
+  justify-content: flex-start;
+  min-height: 64px;
+  border-left: 0;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+.film-journey .world-image > a {
+  overflow: visible;
+}
+.film-journey .world-image img {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+.film-journey .world-image figcaption {
+  display: block;
+  margin-top: 10px;
+}
+.film-journey .world-premise,
+.film-journey .world-consequence p {
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.7;
+  letter-spacing: normal;
+  max-width: 60ch;
+}
+.film-journey .character-editorial-row {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
+}
+.film-journey .character-editorial-image {
+  aspect-ratio: 16 / 9;
+}
+.film-journey .character-editorial-image img {
+  object-fit: contain;
+}
+.film-journey .character-editorial-detail p {
+  font-family: var(--film-mono, monospace);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+.film-journey .production-contributors {
+  border-left: 0;
+  gap: 0 32px;
+}
+.film-journey .production-contributor,
+.film-journey .production-journal-card {
+  min-height: 0;
+  padding: 24px 0;
+  border-right: 0;
+  background: transparent;
+}
+.film-journey .production-contributor {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-content: start;
+  gap: 4px 16px;
+}
+.film-journey .production-contributor img {
+  grid-row: span 2;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+}
+.film-journey .production-contributor h3,
+.film-journey .production-journal-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.film-journey .production-contributor p {
+  grid-column: 2;
+}
+.film-journey .production-journal-card {
+  justify-content: flex-start;
+}
+.film-journey .closing-arrow {
+  font-size: 1rem;
+  padding: 0;
+}
+.film-journey .closing-invitation:hover .closing-arrow {
+  transform: none;
+}
+@media (max-width: 800px) {
+  .film-journey .film-opening {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+  .film-journey .opening-image-frame {
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .film-journey .opening-content {
+    padding: 32px 20px 36px;
+  }
+  .film-journey .opening-title {
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+  }
+  .film-journey .opening-title-ja {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+  }
+  .film-journey .journey-rail a {
+    min-height: 52px;
+    padding: 8px 0;
+  }
+  .film-journey .journey-rail a:nth-child(n) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .film-journey .character-editorial-row {
+    grid-template-columns: 1fr;
+  }
+  .film-journey .character-editorial-image {
+    aspect-ratio: 16 / 9;
+  }
+  .film-journey .character-editorial-detail {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .film-journey .production-contributors {
+    grid-template-columns: 1fr;
+  }
+  .film-journey .production-contributor,
+  .film-journey .production-journal-card {
+    padding: 20px 0;
+  }
+  .film-journey .opening-bottom .film-action,
+  .film-journey .character-editorial-detail .film-action {
+    width: auto;
+  }
+}
