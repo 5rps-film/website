@@ -1,0 +1,55 @@
+.play {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.disc {
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 8vw, 112px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid #f6eddf;
+  box-shadow:
+    0 2px 14px #21180f60,
+    inset 0 0 0 4px #efe6d21a;
+  background: #2d261fda;
+  color: #fff6e8;
+}
+.disc::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 7%;
+  border-top: clamp(9px, 1.25vw, 17px) solid transparent;
+  border-bottom: clamp(9px, 1.25vw, 17px) solid transparent;
+  border-left: clamp(15px, 2.1vw, 29px) solid currentColor;
+}
+.label {
+  padding: 4px 12px 5px;
+  border-radius: 3px;
+  color: #fff6e8;
+  background: #302820f2;
+  font-size: clamp(0.875rem, 1.1vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+a:hover .disc,
+a:focus-visible .disc {
+  background: #f4e7d3;
+  color: #322a22;
+}
+@media (forced-colors: active) {
+  .disc,
+  .label {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+  }
+}

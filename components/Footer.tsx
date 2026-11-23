@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { useLocale } from "@/components/LocaleProvider";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
@@ -76,9 +77,18 @@ export default function Footer() {
               href={`https://maru-ani.jp/${locale}/journal?filter=5rps`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} ${newTab}`}
+              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} — Marunouchi Animation Labs ${newTab}`}
             >
-              {locale === "ja" ? "制作の記録" : "Production journal"}
+              <span className="studio-link-label">
+                <Image
+                  className="studio-mark"
+                  src="/static/images/maru-ani-mark.svg"
+                  alt=""
+                  width={24}
+                  height={24}
+                />
+                {locale === "ja" ? "制作の記録" : "Production journal"}
+              </span>
             </a>
           </div>
         </div>

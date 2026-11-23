@@ -2,8 +2,12 @@
 .poster-opening {
   --poster-width-per-height: 1.77777778;
   --poster-screen: 100vh;
+  --poster-control-row: 72px;
   --poster-max-width: calc(
-    (var(--poster-screen) - var(--film-header-height) - 49px) *
+    (
+        var(--poster-screen) - var(--film-header-height) -
+          var(--poster-control-row) - 1px
+      ) *
       var(--poster-width-per-height)
   );
   display: grid;
@@ -20,28 +24,123 @@
   width: 100%;
   height: auto;
 }
-.poster-caption {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: 1em;
+.poster-controls {
   width: 100%;
-  padding-inline: var(--gutter);
-  min-height: 48px;
-  border-block-start: 1px solid var(--journey-rule);
-  font-size: 0.9375rem;
-  line-height: 1.45;
+  container-type: inline-size;
+  border-block: 1px solid #6f6254;
+  background: rgb(31 27 24 / 48%);
 }
-.poster-caption p {
+.poster-controls-inner {
+  display: grid;
+  grid-template-areas: "status trailer sections";
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0 clamp(16px, 2.4cqw, 36px);
+  min-height: calc(var(--poster-control-row) - 2px);
+  padding-inline: 3.85%;
+}
+.film-production-note {
+  grid-area: status;
   margin: 0;
+  display: grid;
+  gap: 3px;
+  justify-items: start;
 }
-.poster-caption a {
+.film-format {
+  font-size: 1.0625rem;
+  font-weight: 550;
+  line-height: 1.3;
+  letter-spacing: 0.025em;
+}
+.film-status {
   display: inline-flex;
   align-items: center;
+  gap: 7px;
+  color: #d4c5b1;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+.film-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d8ad78;
+}
+.poster-trailer-action {
+  grid-area: trailer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   min-height: 44px;
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 0.24em;
+  gap: 10px;
+  padding: 8px 19px;
+  border-radius: 4px;
+  background: var(--paper-hi);
+  color: var(--ink);
+  border: 1px solid #f7ebda;
+  box-shadow:
+    inset 0 -2px 0 #cabcaa,
+    0 2px 4px #211b1760;
+  line-height: 1.25;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+.poster-trailer-action::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-block: 5px solid transparent;
+  border-left: 8px solid currentColor;
+}
+.poster-trailer-action:hover {
+  background: #fff6e8;
+}
+.poster-sections {
+  grid-area: sections;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #716354;
+  border-radius: 4px;
+  background: linear-gradient(#4e4439, #423a32);
+  box-shadow:
+    inset 0 1px 0 #ffffff0c,
+    0 2px 3px #211b1733;
+}
+.poster-sections a {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: 4px clamp(10px, 1.5cqw, 24px);
+  color: #f2e9de;
+  line-height: 1.3;
+  font-size: 0.9375rem;
+  text-align: center;
+}
+.poster-sections a + a {
+  border-inline-start: 1px solid #726353;
+}
+.poster-sections a:hover {
+  background: #5c5042;
+}
+.poster-controls a:focus-visible {
+  outline: 2px solid #ffe1af;
+  outline-offset: 3px;
+  z-index: 1;
+}
+@container (max-width: 720px) {
+  .poster-controls-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "status trailer" "sections sections";
+    row-gap: 10px;
+    padding-block: 10px;
+  }
+  .poster-trailer-action {
+    padding-inline: 13px;
+  }
+  .film-format {
+    font-size: 1rem;
+  }
 }
 @supports (height: 100svh) {
   .poster-opening {
@@ -54,10 +153,6 @@
   .poster-opening {
     grid-template-columns: min(100%, var(--poster-max-width));
     justify-content: center;
-  }
-  .poster-caption {
-    padding-inline: 3.85%;
-    font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
   }
 }
 
@@ -85,13 +180,6 @@
 }
 .film-journey .film-action span {
   font-size: inherit;
-}
-.film-journey .journey-rail a {
-  justify-content: flex-start;
-  min-height: 64px;
-  border-left: 0;
-  padding: 10px 0;
-  font-size: 1rem;
 }
 .film-journey .world-image > a {
   overflow: visible;
@@ -158,7 +246,10 @@
   grid-column: 2;
 }
 .film-journey .production-journal-card {
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-content: start;
+  gap: 16px;
 }
 .film-journey .closing-arrow {
   font-size: 1rem;
@@ -168,14 +259,6 @@
   transform: none;
 }
 @media (max-width: 800px) {
-  .film-journey .journey-rail a {
-    min-height: 52px;
-    padding: 8px 0;
-  }
-  .film-journey .journey-rail a:nth-child(n) {
-    border-left: 0;
-    padding-left: 0;
-  }
   .film-journey .character-editorial-row {
     grid-template-columns: 1fr;
   }

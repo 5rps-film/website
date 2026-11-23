@@ -23,11 +23,10 @@ export default function Main({
   const journal = `https://maru-ani.jp/${locale}/journal?filter=5rps`;
   const newTab =
     locale === "ja" ? "（新しいタブで開く）" : "(opens in a new tab)";
-  const status =
+  const productionSummary =
     locale === "ja"
       ? "制作中の長編アニメーション"
       : "An animated feature in progress";
-
   return (
     <div className="film-journey">
       <section
@@ -41,20 +40,21 @@ export default function Main({
         <picture className="opening-poster">
           <source
             media="(orientation: landscape) and (max-height: 500px)"
-            srcSet="/static/images/startup-poster-landscape-compact.webp"
+            srcSet="/static/images/startup-poster-landscape-compact.webp 1200w, /static/images/startup-poster-landscape-compact-2400.webp 2400w"
+            sizes="min(100vw, 178vh)"
             width={1200}
             height={675}
           />
           <source
             media="(max-aspect-ratio: 1/1)"
-            srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w"
+            srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w, /static/images/startup-poster-portrait-2048.webp 2048w"
             sizes="(max-aspect-ratio: 2/3) 100vw, 67vh"
             width={1024}
             height={1536}
           />
           <img
             src="/static/images/startup-poster-landscape-1664.webp"
-            srcSet="/static/images/startup-poster-landscape-768.webp 768w, /static/images/startup-poster-landscape-1200.webp 1200w, /static/images/startup-poster-landscape-1664.webp 1664w"
+            srcSet="/static/images/startup-poster-landscape-768.webp 768w, /static/images/startup-poster-landscape-1200.webp 1200w, /static/images/startup-poster-landscape-1664.webp 1664w, /static/images/startup-poster-landscape-3328.webp 3328w"
             sizes="(min-aspect-ratio: 16/9) 178vh, 100vw"
             width={1664}
             height={936}
@@ -66,28 +66,32 @@ export default function Main({
             }
           />
         </picture>
-        <div className="poster-caption">
-          <p>{status}</p>
-          <a href="#trailer">
-            {locale === "ja" ? "予告編を見る" : "Watch trailer"}
-          </a>
+        <div className="poster-controls">
+          <div className="poster-controls-inner">
+            <p className="film-production-note">
+              <span className="film-format">
+                {locale === "ja"
+                  ? "長編アニメーション映画"
+                  : "Animated feature"}
+              </span>
+              <span className="film-status">
+                {locale === "ja" ? "制作中" : "In production"}
+              </span>
+            </p>
+            <a className="poster-trailer-action" href="#trailer">
+              {locale === "ja" ? "予告編を見る" : "Watch trailer"}
+            </a>
+            <nav
+              className="poster-sections"
+              aria-label={locale === "ja" ? "作品情報" : "Explore the film"}
+            >
+              <a href="#story-world">{t("story")}</a>
+              <a href="#characters">{t("characters")}</a>
+              <a href="#production">{t("about")}</a>
+            </nav>
+          </div>
         </div>
       </section>
-
-      <nav
-        className="journey-rail"
-        aria-label={
-          locale === "ja" ? "このページのコンテンツ" : "Explore the film"
-        }
-        data-header-tone="dark"
-      >
-        <div className="section-inner journey-rail-inner">
-          <a href="#trailer">{locale === "ja" ? "予告編" : "Trailer"}</a>
-          <a href="#story-world">{t("story")}</a>
-          <a href="#characters">{t("characters")}</a>
-          <a href="#production">{t("about")}</a>
-        </div>
-      </nav>
 
       <section
         className="section journey-trailer"
@@ -287,7 +291,7 @@ export default function Main({
               </JapaneseLineBreak>
             </h2>
             <div data-reveal>
-              <p>{status}</p>
+              <p>{productionSummary}</p>
               <p>
                 <JapaneseLineBreak>
                   {locale === "ja"
@@ -328,14 +332,23 @@ export default function Main({
               href={journal}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} ${newTab}`}
+              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} — Marunouchi Animation Labs ${newTab}`}
             >
-              <h3>
-                <JapaneseLineBreak>
-                  {locale === "ja" ? "制作の記録" : "Production journal"}
-                </JapaneseLineBreak>
-              </h3>
-              <p>Marunouchi Animation Labs</p>
+              <Image
+                className="studio-mark studio-mark-card"
+                src="/static/images/maru-ani-mark.svg"
+                alt=""
+                width={64}
+                height={64}
+              />
+              <div>
+                <h3>
+                  <JapaneseLineBreak>
+                    {locale === "ja" ? "制作の記録" : "Production journal"}
+                  </JapaneseLineBreak>
+                </h3>
+                <p>Marunouchi Animation Labs</p>
+              </div>
             </a>
           </div>
         </div>
@@ -385,8 +398,15 @@ export default function Main({
               href={journal}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} ${newTab}`}
+              aria-label={`${locale === "ja" ? "制作の記録" : "Production journal"} — Marunouchi Animation Labs ${newTab}`}
             >
+              <Image
+                className="studio-mark"
+                src="/static/images/maru-ani-mark.svg"
+                alt=""
+                width={24}
+                height={24}
+              />
               {locale === "ja" ? "制作の記録" : "Production journal"}
             </a>
           </div>

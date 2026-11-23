@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Maru-Ani mark</title>
+  <desc id="desc">A film-page mark with three perforations and a red circular core.</desc>
+  <rect width="1024" height="1024" rx="112" fill="#131412"/>
+  <rect x="176" y="128" width="672" height="768" rx="32" fill="#efece9"/>
+  <g fill="#131412">
+    <circle cx="272" cy="246" r="42"/>
+    <circle cx="272" cy="512" r="42"/>
+    <circle cx="272" cy="778" r="42"/>
+  </g>
+  <circle cx="592" cy="512" r="144" fill="#c22f25"/>
+</svg>

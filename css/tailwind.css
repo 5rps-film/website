@@ -2514,3 +2514,22 @@ body {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
+
+/* Studio identity accompanies links to the Maru-Ani production journal. */
+.studio-mark {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.studio-mark-card {
+  width: 64px;
+  height: 64px;
+}
+.studio-link-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}

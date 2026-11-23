@@ -89,14 +89,14 @@ export default function Media() {
                 <picture>
                   <source
                     media="(max-width: 800px)"
-                    srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w"
+                    srcSet="/static/images/startup-poster-portrait-480.webp 480w, /static/images/startup-poster-portrait-768.webp 768w, /static/images/startup-poster-portrait-1024.webp 1024w, /static/images/startup-poster-portrait-2048.webp 2048w"
                     sizes="(max-width: 800px) 100vw, 55vw"
                     width={1024}
                     height={1536}
                   />
                   <img
                     src="/static/images/startup-poster-landscape-1200.webp"
-                    srcSet="/static/images/startup-poster-landscape-768.webp 768w, /static/images/startup-poster-landscape-1200.webp 1200w, /static/images/startup-poster-landscape-1664.webp 1664w"
+                    srcSet="/static/images/startup-poster-landscape-768.webp 768w, /static/images/startup-poster-landscape-1200.webp 1200w, /static/images/startup-poster-landscape-1664.webp 1664w, /static/images/startup-poster-landscape-3328.webp 3328w"
                     sizes="(max-width: 800px) 100vw, 55vw"
                     width={1664}
                     height={936}
